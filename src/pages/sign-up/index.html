@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {{> headContent }}
+    <link rel="stylesheet" href="./styles.scss" />
+  </head>
+
+  <body>
+    <div class="app">
+      <form class="sign-up-form">
+        <h3 class="title">Регистрация</h3>
+
+        <div class="field-input">
+          <input placeholder=" " id="mail" autocomplete="off" />
+          <label for="mail">Почта</label>
+        </div>
+
+        <div class="field-input">
+          <input placeholder=" " id="login" autocomplete="off" />
+          <label for="login">Логин</label>
+        </div>
+
+        <div class="field-input">
+          <input placeholder=" " id="firstname" autocomplete="off" />
+          <label for="firstname">Имя</label>
+        </div>
+
+        <div class="field-input">
+          <input placeholder=" " id="surname" autocomplete="off" />
+          <label for="surname">Фамилия</label>
+        </div>
+
+        <div class="field-input">
+          <input placeholder=" " id="phone" autocomplete="off" />
+          <label for="phone">Телефон</label>
+        </div>
+
+        <div class="field-input">
+          <input placeholder=" " id="password" type="password" autocomplete="off" />
+          <label for="password">Пароль</label>
+        </div>
+
+        <div class="field-input error">
+          <input placeholder=" " id="password-repeat" type="password" autocomplete="off" value="test" />
+          <label for="password-repeat">Пароль (ещё раз)</label>
+          <span class="input-error">Пароли не совпадают</span>
+        </div>
+
+        <button type="submit" class="btn-submit">Зарегистрироваться</button>
+
+        <p class="link-wrapper">
+          <a href="../../pages/sign-in/index.html">Войти</a>
+        </p>
+      </form>
+    </div>
+  </body>
+</html>

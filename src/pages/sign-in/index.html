@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {{> headContent }}
+    <link rel="stylesheet" href="./styles.scss" />
+  </head>
+
+  <body>
+    <div class="app">
+      <form class="sign-in-form">
+        <h3 class="title">Вход</h3>
+
+        <div class="field-input">
+          <input placeholder=" " id="login" />
+          <label for="login">Логин</label>
+        </div>
+
+        <div class="field-input">
+          <input placeholder=" " id="password" type="password" />
+          <label for="password">Пароль</label>
+        </div>
+
+        <button type="submit" class="btn-submit">Войти</button>
+
+        <p class="link-wrapper">
+          <a href="../../pages/sign-up/index.html">Нет аккаунта?</a>
+        </p>
+      </form>
+    </div>
+  </body>
+</html>
