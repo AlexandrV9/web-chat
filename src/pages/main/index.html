@@ -3,22 +3,70 @@
   <head>
     {{> headContent }}
     <link rel="stylesheet" href="./style.scss" />
-
-    <script src="./index.js" defer></script>
   </head>
   <body>
     <div class="app">
+      <!-- TODO: удалить после проверки -->
+      {{> forTestPages}}
       <div class="page-content">
-        <div class="left-container">
+        <!-- TODO: вынести в отдельный компонент -->
+        <div class="left-box">
+          <div class="top"><h3 class="title">Чаты</h3></div>
+          
+          <ul class="chat-list">
+            <li class="chat-list-item">Чат 01</li>
+            <li class="chat-list-item">Чат 02</li>
+            <li class="chat-list-item">Чат 03</li>
+            <li class="chat-list-item">Чат 99</li>
+          </ul>
+
           <nav class="navbar">
             <ul class="nav-list">
-              {{> navListItem iconPath="../../assets/icons/index.svg#users" }}
-              {{> navListItem iconPath="../../assets/icons/index.svg#chat-bubble-left-right" }}
-              {{> navListItem iconPath="../../assets/icons/index.svg#user-circle" }}
+              {{> navListItem iconPath="/assets/icons/index.svg#users" linkPath="/pages/main/index.html" }} 
+              {{> navListItem iconPath="/assets/icons/index.svg#chat-bubble-left-right" linkPath="/pages/main/index.html"}}
+              {{> navListItem iconPath="/assets/icons/index.svg#user-circle" linkPath="/pages/profile/index.html" }}
             </ul>
           </nav>
         </div>
-        <div class="main-container">main-container</div>
+
+        <div class="main-container">
+          <div class="top">
+            <div class="chat-info">
+              <div class="fallback-chat-avatar"></div>
+              <h3 class="chat-title">Вадим</h3>
+            </div>
+
+            <div class="action-slot">
+              <button class="btn-chat-actions">
+                <svg fill="none">
+                  <use href="/assets/icons/index.svg#ellipsis-v"></use>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <div class="main">
+            
+          </div>
+
+          <div class="bottom">
+            <form class="form-send-message">
+              <button class="btn-attach">
+                <svg fill="none">
+                  <use href="/assets/icons/index.svg#paper-clip"></use>
+                </svg>
+              </button>
+
+              <input class="inp-text-message" placeholder="Введите сообщение..." />
+
+              <button class="btn-send-message">
+                <svg fill="none">
+                  <use href="/assets/icons/index.svg#arrow-right"></use>
+                </svg>
+              </button>
+            </form>
+          </div>
+        </div>
       </div>
     </div>
   </body>

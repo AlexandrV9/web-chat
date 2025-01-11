@@ -78,14 +78,6 @@
   color: var(--btn-primary-color);
   background: var(--btn-primary-bg);
   border-radius: var(--btn-primary-border-rad);
-
-  cursor: pointer;
-
-  transition: opacity 0.2s;
-
-  &:hover {
-    opacity: 0.6;
-  }
 }
 
 .link-wrapper {

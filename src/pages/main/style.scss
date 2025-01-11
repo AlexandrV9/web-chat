@@ -4,37 +4,175 @@
   height: 100%;
 }
 
-.left-container {
+.left-box {
   background: var(--bg-secondary);
   border-right: var(--border-primary);
   width: 31rem;
   display: flex;
   flex-direction: column;
+
+  .top {
+    height: 5.5rem;
+    border-bottom: var(--border-primary);
+    margin: 0 1rem;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .title {
+      font: var(--font-base);
+      font-weight: 600;
+    }
+  }
 }
 
 .navbar {
+  display: grid;
+  place-items: center;
+
+  height: 5.5rem;
   margin-top: auto;
-  padding: 12px;
+
+  border-top: var(--border-primary);
   background: var(--bg-tertiary);
 
   .nav-list {
     display: flex;
     justify-content: space-evenly;
     color: var(--secondary-color);
+    width: 100%;
 
     .nav-list-item {
-
-      transition: opacity .2s;
+      transition: opacity 0.2s;
 
       &:hover {
         cursor: pointer;
         opacity: 0.6;
       }
 
+      a {
+        color: var(--text-secondary-color);
+      }
+
       .nav-icon {
-        width: 2rem;
-        height: 2rem;
+        width: 2.4rem;
+        height: 2.4rem;
       }
     }
+  }
+}
+
+.main-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.top,
+.bottom {
+  padding: 1.1rem 0;
+  height: 5.5rem;
+  margin: 0 20px;
+}
+
+.top {
+  border-bottom: var(--border-primary);
+}
+
+.bottom {
+  border-top: var(--border-primary);
+}
+
+.main {
+  flex: 1;
+}
+
+.top {
+  display: flex;
+  gap: 1rem;
+
+  .chat-info {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+
+    .fallback-chat-avatar {
+      width: 3.4rem;
+      height: 3.4rem;
+      border-radius: 50%;
+      background-color: var(--bg-tertiary);
+    }
+
+    .chat-title {
+      font: var(--font-base);
+      font-weight: 600;
+    }
+  }
+
+  .action-slot {
+    margin-left: auto;
+  }
+
+  .btn-chat-actions {
+    width: 2.8rem;
+    height: 2.8rem;
+    border-radius: 50%;
+
+    svg {
+      width: 100%;
+      height: 100%;
+    }
+  }
+}
+
+.form-send-message {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
+  .btn-attach {
+    width: 2.4rem;
+    height: 2.4rem;
+    color: var(--secondary-color);
+
+    svg {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  .inp-text-message {
+    flex: 1;
+    padding: 1rem 2rem;
+    border-radius: 3rem;
+    background-color: var(--bg-tertiary);
+  }
+
+  .btn-send-message {
+    width: 2.8rem;
+    height: 2.8rem;
+
+    border-radius: 50%;
+
+    display: grid;
+    place-items: center;
+    color: var(--btn-primary-color);
+    background-color: var(--btn-primary-bg);
+
+    svg {
+      width: 60%;
+      height: 60%;
+    }
+  }
+}
+
+.chat-list {
+  padding: 0 1rem;
+
+  .chat-list-item {
+    padding: 1.2rem 0;
+    font: var(--font-m);
+    border-top: var(--border-primary);
   }
 }

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {{> headContent }}
+    <link rel="stylesheet" href="./style.scss" />
+  </head>
+  <body>
+    <div class="app">
+      <!-- TODO: удалить после проверки -->
+      {{> forTestPages}}
+      <div class="page-content">
+        <!-- TODO: вынести в отдельный компонент -->
+        <div class="left-box">
+          <div class="top"><h3 class="title">Профиль</h3></div>
+          <nav class="navbar">
+            <ul class="nav-list">
+              {{> navListItem iconPath="/assets/icons/index.svg#users" linkPath="/pages/main/index.html" }} 
+              {{> navListItem iconPath="/assets/icons/index.svg#chat-bubble-left-right" linkPath="/pages/main/index.html"}}
+              {{> navListItem iconPath="/assets/icons/index.svg#user-circle" linkPath="/pages/profile/index.html" }}
+            </ul>
+          </nav>
+        </div>
+        <div class="main-container">
+          <div class="fallback-user-avatar">
+            <svg fill="none">
+              <use href="/assets/icons/index.svg#image"></use>
+            </svg>
+          </div>
+
+          <h3 class="profile-name">Иван</h3>
+
+          <ul class="profile-info-list">
+            <li class="item-list">
+              <p>Почта</p>
+              <p>pochta@yandex.ru</p>
+            </li>
+
+            <li class="item-list">
+              <p>Логин</p>
+              <p>ivanivanov</p>
+            </li>
+
+            <li class="item-list">
+              <p>Имя</p>
+              <p>Иван</p>
+            </li>
+
+            <li class="item-list">
+              <p>Фамилия</p>
+              <p>Иванов</p>
+            </li>
+
+            <li class="item-list">
+              <p>Имя в чате</p>
+              <p>Иван</p>
+            </li>
+
+            <li class="item-list">
+              <p>Телефон</p>
+              <p>+7 (909) 967 30 30</p>
+            </li>
+          </ul>
+
+          <ul class="profile-actions-list">
+            <li class="item-list"><button>Изменить данные</button></li>
+            <li class="item-list"><button>Изменить пароль</button></li>
+            <li class="item-list"><button>Выйти</button></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
