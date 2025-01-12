@@ -15,4 +15,7 @@ export default defineConfig({
       content: { username: "Test" },
     }),
   ],
+  server: {
+    port: 3000,
+  },
 });
