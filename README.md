@@ -1,5 +1,7 @@
 # Проект Web-chat
 
+Текущий PR: https://github.com/AlexandrV9/web-chat/pull/1
+
 Посмотреть проект можно [тут](https://sparkly-medovik-682ad3.netlify.app/pages/home/).
 
 ## Описание
