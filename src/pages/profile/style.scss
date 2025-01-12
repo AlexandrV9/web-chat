@@ -1,73 +1,13 @@
-.page-content {
-  display: flex;
-  width: 100%;
-  height: 100%;
-}
-
-.left-box {
-  background: var(--bg-secondary);
-  border-right: var(--border-primary);
-  width: 31rem;
-  display: flex;
-  flex-direction: column;
-
-  .top {
-    height: 5.5rem;
-    border-bottom: var(--border-primary);
-    margin: 0 1rem;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    .title {
-      font: var(--font-base);
-      font-weight: 600;
-    }
-  }
-}
-
-.navbar {
-  display: grid;
-  place-items: center;
-
-  height: 5.5rem;
-  margin-top: auto;
-
-  border-top: var(--border-primary);
-  background: var(--bg-tertiary);
-
-  .nav-list {
-    display: flex;
-    justify-content: space-evenly;
-    color: var(--secondary-color);
-    width: 100%;
-
-    .nav-list-item {
-      transition: opacity 0.2s;
-
-      &:hover {
-        cursor: pointer;
-        opacity: 0.6;
-      }
-
-      a {
-        color: var(--text-secondary-color);
-      }
-
-      .nav-icon {
-        width: 2.4rem;
-        height: 2.4rem;
-      }
-    }
-  }
-}
-
 .main-container {
   flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  form {
+    width: 100%;
+    max-width: 51rem;
+  }
 }
 
 .fallback-user-avatar {
@@ -93,12 +33,6 @@
   margin-bottom: 6rem;
 }
 
-.profile-info-list,
-.profile-actions-list {
-  width: 100%;
-  max-width: 51rem;
-}
-
 .profile-info-list {
   margin-bottom: 6rem;
 
@@ -106,8 +40,15 @@
     display: flex;
     justify-content: space-between;
     padding-bottom: 1rem;
+    gap: 1rem;
 
-    & > p:last-of-type {
+    input {
+      background: transparent;
+      text-align: right;
+      flex: 1;
+    }
+
+    & > input:last-of-type {
       color: var(--text-secondary-color);
     }
 

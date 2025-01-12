@@ -1,24 +1,24 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
   <head>
     {{> headContent }}
     <link rel="stylesheet" href="./styles.scss" />
   </head>
 
   <body>
-    <div class="app">
+    <main class="app">
       <!-- TODO: удалить после проверки -->
       {{> forTestPages}}
       <form class="sign-in-form">
         <h3 class="title">Вход</h3>
 
         <div class="field-input">
-          <input placeholder=" " id="login" />
+          <input placeholder=" " id="login" name="login" />
           <label for="login">Логин</label>
         </div>
 
         <div class="field-input">
-          <input placeholder=" " id="password" type="password" />
+          <input placeholder=" " id="password" type="password" name="password" />
           <label for="password">Пароль</label>
         </div>
 
@@ -28,6 +28,6 @@
           <a href="../../pages/sign-up/index.html">Нет аккаунта?</a>
         </p>
       </form>
-    </div>
+    </main>
   </body>
 </html>

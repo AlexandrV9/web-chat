@@ -1,73 +1,107 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
   <head>
     {{> headContent }}
     <link rel="stylesheet" href="./style.scss" />
   </head>
   <body>
-    <div class="app">
+    <main class="app">
       <!-- TODO: удалить после проверки -->
       {{> forTestPages}}
       <div class="page-content">
         <!-- TODO: вынести в отдельный компонент -->
-        <div class="left-box">
+        <aside class="left-panel">
           <div class="top"><h3 class="title">Профиль</h3></div>
           <nav class="navbar">
             <ul class="nav-list">
-              {{> navListItem iconPath="/assets/icons/index.svg#users" linkPath="/pages/main/index.html" }} 
-              {{> navListItem iconPath="/assets/icons/index.svg#chat-bubble-left-right" linkPath="/pages/main/index.html"}}
-              {{> navListItem iconPath="/assets/icons/index.svg#user-circle" linkPath="/pages/profile/index.html" }}
+              {{> navListItem iconPath="/assets/icons/index.svg#users"
+              linkPath="/pages/main/index.html" }} {{> navListItem
+              iconPath="/assets/icons/index.svg#chat-bubble-left-right"
+              linkPath="/pages/main/index.html"}} {{> navListItem
+              iconPath="/assets/icons/index.svg#user-circle" linkPath="/pages/profile/index.html" }}
             </ul>
           </nav>
-        </div>
+        </aside>
         <div class="main-container">
-          <div class="fallback-user-avatar">
-            <svg fill="none">
-              <use href="/assets/icons/index.svg#image"></use>
-            </svg>
-          </div>
+          <div class="fallback-user-avatar">{{> icon path="/assets/icons/index.svg#image" }}</div>
 
           <h3 class="profile-name">Иван</h3>
 
-          <ul class="profile-info-list">
-            <li class="item-list">
-              <p>Почта</p>
-              <p>pochta@yandex.ru</p>
-            </li>
+          <form>
+            <ul class="profile-info-list">
+              <li class="item-list">
+                <label for="email">Почта</label>
+                <input value="pochta@yandex.ru" name="email" id="email" disabled />
+              </li>
 
-            <li class="item-list">
-              <p>Логин</p>
-              <p>ivanivanov</p>
-            </li>
+              <li class="item-list">
+                <label for="login">Логин</label>
+                <input value="ivanivanov" name="login" id="login" disabled />
+              </li>
 
-            <li class="item-list">
-              <p>Имя</p>
-              <p>Иван</p>
-            </li>
+              <li class="item-list">
+                <label for="first_name">Имя</label>
+                <input value="Иван" name="first_name" id="first_name" disabled />
+              </li>
 
-            <li class="item-list">
-              <p>Фамилия</p>
-              <p>Иванов</p>
-            </li>
+              <li class="item-list">
+                <label for="second_name">Фамилия</label>
+                <input value="Иванов" name="second_name" id="second_name" disabled />
+              </li>
 
-            <li class="item-list">
-              <p>Имя в чате</p>
-              <p>Иван</p>
-            </li>
+              <li class="item-list">
+                <label for="display_name">Имя в чате</label>
+                <input value="Иван" name="display_name" id="display_name" disabled />
+              </li>
 
-            <li class="item-list">
-              <p>Телефон</p>
-              <p>+7 (909) 967 30 30</p>
-            </li>
-          </ul>
+              <li class="item-list">
+                <label for="phone">Телефон</label>
+                <input value="+7 (909) 967 30 30" name="phone" id="phone" disabled />
+              </li>
 
-          <ul class="profile-actions-list">
-            <li class="item-list"><button>Изменить данные</button></li>
-            <li class="item-list"><button>Изменить пароль</button></li>
-            <li class="item-list"><button>Выйти</button></li>
-          </ul>
+              <!-- TODO: вынести в отдельный компонент  -->
+              <li class="item-list">
+                <label for="oldPassword">Старый пароль</label>
+                <input
+                  value="+7 (909) 967 30 30"
+                  name="oldPassword"
+                  id="oldPassword"
+                  type="password"
+                  disabled
+                />
+              </li>
+
+              <li class="item-list">
+                <label for="newPassword">Новый пароль</label>
+                <input
+                  value="+7 (909) 967 30 30"
+                  name="newPassword"
+                  id="newPassword"
+                  type="password"
+                  disabled
+                />
+              </li>
+
+              <li class="item-list">
+                <label for="newPasswordRepeat">Повторите новый пароль</label>
+                <input
+                  value="+7 (909) 967 30 30"
+                  name="newPasswordRepeat"
+                  id="newPasswordRepeat"
+                  type="password"
+                  disabled
+                />
+              </li>
+            </ul>
+
+            <ul class="profile-actions-list">
+              <li class="item-list"><button>Изменить данные</button></li>
+              <li class="item-list"><button>Изменить пароль</button></li>
+              <li class="item-list"><button>Выйти</button></li>
+            </ul>
+          </form>
         </div>
       </div>
-    </div>
+    </main>
   </body>
 </html>
