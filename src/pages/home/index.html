@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    {{> headContent }}
+    <link rel="stylesheet" href="./style.scss" />
+  </head>
+  <body>
+    <main class="app">
+      <!-- TODO: удалить после проверки -->
+      {{> forTestPages}}
+      <div class="page-content">
+        <!-- TODO: вынести в отдельный компонент -->
+        <aside class="left-panel">
+          <section class="top">
+            <h3 class="title">Чаты</h3>
+            <button class="btn-edit">
+              {{> icon path="/assets/icons/index.svg#pencil-square" }}
+            </button>
+          </section>
+
+          <div class="search-chats">
+            <input
+              type="text"
+              class="inp-search-chats"
+              placeholder="Введите название чата..."
+            />
+          </div>
+
+          <ul class="chat-list">
+            <li class="chat-list-item">Чат 01</li>
+            <li class="chat-list-item">Чат 02</li>
+            <li class="chat-list-item">Чат 03</li>
+            <li class="chat-list-item">Чат 99</li>
+          </ul>
+
+          <nav class="navbar">
+            <ul class="nav-list">
+              {{> navListItem iconPath="/assets/icons/index.svg#users"
+              linkPath="/pages/home/index.html" }} {{> navListItem
+              iconPath="/assets/icons/index.svg#chat-bubble-left-right"
+              linkPath="/pages/home/index.html"}} {{> navListItem
+              iconPath="/assets/icons/index.svg#user-circle"
+              linkPath="/pages/profile/index.html" }}
+            </ul>
+          </nav>
+        </aside>
+
+        <section class="main-container">
+          <div class="top">
+            <div class="chat-info">
+              <div class="fallback-chat-avatar"></div>
+              <h3 class="chat-title">Вадим</h3>
+            </div>
+
+            <div class="action-slot">
+              <button class="btn-chat-actions">
+                {{> icon path="/assets/icons/index.svg#ellipsis-v" }}
+              </button>
+            </div>
+          </div>
+
+          <div class="main">
+            <div class="fallback-container">
+              <p>Выберите чат чтобы отправить сообщение</p>
+            </div>
+          </div>
+
+          <div class="bottom">
+            <form class="form-send-message">
+              <button class="btn-attach">
+                {{> icon path="/assets/icons/index.svg#paper-clip" }}
+              </button>
+
+              <input
+                class="inp-text-message"
+                placeholder="Введите сообщение..."
+                name="message"
+              />
+
+              <button class="btn-send-message">
+                {{> icon path="/assets/icons/index.svg#arrow-right" }}
+              </button>
+            </form>
+          </div>
+        </section>
+      </div>
+    </main>
+  </body>
+</html>
