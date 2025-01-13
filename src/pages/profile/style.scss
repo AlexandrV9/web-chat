@@ -4,9 +4,69 @@
   flex-direction: column;
   align-items: center;
 
+  max-height: 100vh;
+  padding: 1rem 0 7rem;
+
+  overflow: auto;
+
   form {
     width: 100%;
     max-width: 51rem;
+  }
+}
+
+.profile-avatar {
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+  margin: 7rem 0 2.1rem;
+
+  .cover {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    display: grid;
+    place-items: center;
+
+    width: 100%;
+    height: 100%;
+
+    opacity: 0;
+
+    background-color: rgba(0, 0, 0, 0.6);
+
+    word-break: break-all;
+    border-radius: 50%;
+
+    transition: opacity 0.2s;
+
+    .text-hint {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      font: var(--font-base);
+      line-height: 1.6rem;
+      color: var(--bg-primary);
+    }
+  }
+
+  &:hover {
+    cursor: pointer;
+
+    .cover {
+      opacity: 1;
+    }
+  }
+
+  input {
+    display: block;
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+    width: 0;
+    height: 0;
   }
 }
 
@@ -18,7 +78,6 @@
   border-radius: 50%;
   display: grid;
   place-items: center;
-  margin: 7rem 0 2.1rem;
 
   svg {
     width: 4rem;

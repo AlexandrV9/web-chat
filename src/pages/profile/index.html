@@ -23,7 +23,18 @@
           </nav>
         </aside>
         <div class="main-container">
-          <div class="fallback-user-avatar">{{> icon path="/assets/icons/index.svg#image" }}</div>
+          <label class="profile-avatar">
+            <div class="fallback-user-avatar">{{> icon path="/assets/icons/index.svg#image" }}</div>
+
+            <div class="cover">
+              <p class="text-hint">
+                <span>Поменять</span>
+                <span>аватар</span>                
+              </p>
+            </div>
+
+            <input type="file" name="avatar" class="inp-avatar" />
+          </label>
 
           <h3 class="profile-name">Иван</h3>
 

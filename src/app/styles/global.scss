@@ -55,4 +55,10 @@ svg {
 
   font-size: 1.6rem;
   background-color: rgb(178, 178, 178);
+
+  ul li {
+    &:not(:last-of-type) {
+      margin-bottom: 1rem;
+    }
+  }
 }
