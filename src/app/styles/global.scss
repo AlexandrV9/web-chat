@@ -1,0 +1,64 @@
+@import url(./fonts.scss);
+@import url(./reset.scss);
+@import url(./variables.scss);
+
+@import url(./blocks/left-panel.scss);
+@import url(./blocks/navbar.scss);
+
+html {
+  font-family: var(--font-family-primary);
+  font-size: 10px;
+}
+
+body {
+  width: 100%;
+  height: 100vh;
+}
+
+button {
+  transition: opacity 0.2s;
+
+  &:hover {
+    cursor: pointer;
+    opacity: 0.6;
+  }
+}
+
+svg {
+  width: 100%;
+  height: 100%;
+}
+
+.app {
+  width: 100%;
+  height: 100%;
+
+  display: grid;
+  place-items: center;
+}
+
+.page-content {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
+// TODO: удалить после проверки
+.test-pages {
+  position: fixed;
+  top: 160px;
+  right: 10px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  font-size: 1.6rem;
+  background-color: rgb(178, 178, 178);
+
+  ul li {
+    &:not(:last-of-type) {
+      margin-bottom: 1rem;
+    }
+  }
+}

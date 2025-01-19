@@ -1,0 +1,66 @@
+:root {
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  --font-family-primary: "Inter", serif;
+
+  --bg-cover: rgba(0, 0, 0, 0.6);
+
+  // borders
+
+  --border-primary: 1px solid #eaeaea;
+
+  // backgrounds
+
+  --bg-primary: #ffffff;
+  --bg-secondary: #fbfbfb;
+  --bg-tertiary: #efefef;
+
+  // colors
+  --primary-color: #1e1e1e;
+  --accent-color: #3369f3;
+  --secondary-color: #999999;
+
+  // text
+
+  --text-primary-color: #1e1e1e;
+  --text-secondary-color: #999999;
+  --text-accent-color: #3369f3;
+  --text-alert-color: #ff2f2f;
+
+  // buttons
+
+  --btn-primary-bg: #3369f3;
+  --btn-primary-color: #ffffff;
+  --btn-primary-border-rad: 8px;
+
+  --shadow-primary: 0px 0px 6px 0px rgba(0, 0, 0, 0.14);
+
+  // fonts
+
+  --fs-xxs: 8px;
+  --fl-xxs: 16px;
+  --font-xxs: var(--fs-xxs) / var(--fl-xxs) var(--font-family-primary);
+
+  --fs-xs: 10px;
+  --fl-xs: 18px;
+  --font-xs: var(--fs-xs) / var(--fl-xs) var(--font-family-primary);
+
+  --fs-s: 10px;
+  --fl-s: 18px;
+  --font-s: var(--fs-s) / var(--fl-s) var(--font-family-primary);
+
+  --fs-base: 14px;
+  --fl-base: 22px;
+  --font-base: var(--fs-base) / var(--fl-base) var(--font-family-primary);
+
+  --fs-m: 16px;
+  --fl-m: 24px;
+  --font-m: var(--fs-m) / var(--fl-m) var(--font-family-primary);
+
+  --fs-l: 20px;
+  --fl-l: 28px;
+  --font-l: var(--fs-l) / var(--fl-l) var(--font-family-primary);
+}

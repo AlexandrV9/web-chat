@@ -1,0 +1,138 @@
+.main-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+
+  .top {
+    border-bottom: var(--border-primary);
+  }
+
+  .top,
+  .bottom {
+    padding: 1.1rem 0;
+    height: 5.5rem;
+    margin: 0 20px;
+  }
+
+  .bottom {
+    border-top: var(--border-primary);
+  }
+
+  .main {
+    flex: 1;
+  }
+
+  .top {
+    display: flex;
+    gap: 1rem;
+    position: relative;
+
+    .chat-info {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+
+      .fallback-chat-avatar {
+        width: 3.4rem;
+        height: 3.4rem;
+        border-radius: 50%;
+        background-color: var(--bg-tertiary);
+      }
+
+      .chat-title {
+        font: var(--font-base);
+        font-weight: 600;
+      }
+    }
+
+    .action-slot {
+      margin-left: auto;
+    }
+
+    .btn-chat-actions {
+      width: 2.8rem;
+      height: 2.8rem;
+      border-radius: 50%;
+    }
+  }
+}
+
+.form-send-message {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
+  .btn-attach {
+    width: 2.4rem;
+    height: 2.4rem;
+    color: var(--secondary-color);
+  }
+
+  .inp-text-message {
+    flex: 1;
+    padding: 1rem 2rem;
+    border-radius: 3rem;
+    background-color: var(--bg-tertiary);
+  }
+
+  .btn-send-message {
+    width: 2.8rem;
+    height: 2.8rem;
+
+    border-radius: 50%;
+
+    display: grid;
+    place-items: center;
+    color: var(--btn-primary-color);
+    background-color: var(--btn-primary-bg);
+
+    svg {
+      width: 60%;
+      height: 60%;
+    }
+  }
+}
+
+.fallback-container {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+
+  p {
+    font: var(--font-m);
+    color: var(--secondary-color);
+  }
+}
+
+.search-chats {
+  margin: 0 1rem;
+}
+
+.inp-search-chats {
+  padding: 0.8rem 1rem;
+  background: var(--bg-tertiary);
+  width: 100%;
+  border-radius: 0.5rem;
+  margin-bottom: 0.7rem;
+}
+
+.chat-list {
+  padding: 0 1rem;
+
+  .chat-list-item {
+    padding: 1.2rem 0;
+    font: var(--font-m);
+    border-top: var(--border-primary);
+  }
+}
+
+.btn-edit {
+  width: 2rem;
+  height: 2rem;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--secondary-color);
+}

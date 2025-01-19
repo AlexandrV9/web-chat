@@ -1,0 +1,144 @@
+.main-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  max-height: 100vh;
+  padding: 1rem 0 7rem;
+
+  overflow: auto;
+
+  form {
+    width: 100%;
+    max-width: 51rem;
+  }
+}
+
+.profile-avatar {
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+  margin: 7rem 0 2.1rem;
+
+  .cover {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    display: grid;
+    place-items: center;
+
+    width: 100%;
+    height: 100%;
+
+    opacity: 0;
+
+    background-color: var(--bg-cover);
+
+    word-break: break-all;
+    border-radius: 50%;
+
+    transition: opacity 0.2s;
+
+    .text-hint {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      font: var(--font-base);
+      line-height: 1.6rem;
+      color: var(--bg-primary);
+    }
+  }
+
+  &:hover {
+    cursor: pointer;
+
+    .cover {
+      opacity: 1;
+    }
+  }
+
+  input {
+    display: block;
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+}
+
+.fallback-user-avatar {
+  width: 13rem;
+  height: 13rem;
+  color: #cdcdcd;
+  background-color: var(--bg-tertiary);
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+
+  svg {
+    width: 4rem;
+    height: 4rem;
+  }
+}
+
+.profile-name {
+  font: var(--font-m);
+  font-weight: 600;
+
+  margin-bottom: 6rem;
+}
+
+.profile-info-list {
+  margin-bottom: 6rem;
+
+  .item-list {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 1rem;
+    gap: 1rem;
+
+    input {
+      background: transparent;
+      text-align: right;
+      flex: 1;
+    }
+
+    & > input:last-of-type {
+      color: var(--text-secondary-color);
+    }
+
+    font: var(--font-m);
+
+    &:not(:last-of-type) {
+      border-bottom: var(--border-primary);
+      margin-bottom: 1rem;
+    }
+  }
+}
+
+.profile-actions-list {
+  .item-list {
+    padding-bottom: 1rem;
+
+    button {
+      font: var(--font-m);
+      font-weight: 600;
+      color: var(--text-accent-color);
+    }
+
+    &:not(:last-of-type) {
+      border-bottom: var(--border-primary);
+      margin-bottom: 1rem;
+    }
+
+    &:last-of-type {
+      button {
+        color: #ff0000;
+      }
+    }
+  }
+}
