@@ -1,12 +1,10 @@
 .sign-up-form {
   display: flex;
   flex-direction: column;
-
   width: 100%;
   max-width: 34rem;
   min-height: 46rem;
   padding: 5rem 3rem 3rem;
-
   border-radius: 1.2rem;
   background: var(--bg-primary);
   box-shadow: var(--shadow-primary);
@@ -28,7 +26,6 @@
     position: absolute;
     color: var(--text-secondary-color);
     font: var(--font-base);
-
     top: 0;
     transition: all 0.2s;
   }
@@ -37,9 +34,7 @@
     font: var(--font-base);
     font-weight: 500;
     transition: all 0.2s;
-
     padding-bottom: 7px;
-
     border-bottom: 1px solid var(--accent-color);
 
     &:hover,
@@ -82,7 +77,6 @@
 
 .link-wrapper {
   margin: 1.4rem auto 0;
-
   transition: opacity 0.2s;
 
   &:hover {
@@ -90,8 +84,8 @@
   }
 
   a {
-    font-weight: 500;
     font: var(--font-s);
+    font-weight: 500;
     color: var(--accent-color);
   }
 }

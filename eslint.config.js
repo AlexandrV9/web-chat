@@ -21,6 +21,6 @@ export default [
       '@typescript-eslint/no-require-imports': 'off',
       '@typescript-eslint/no-unused-vars': 'warn',
     },
-    ignores: ['./dist/'],
+    ignores: ['./dist/**/*'],
   },
 ];

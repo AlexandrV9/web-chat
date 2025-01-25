@@ -3,10 +3,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-
   max-height: 100vh;
   padding: 1rem 0 7rem;
-
   overflow: auto;
 
   form {
@@ -25,27 +23,20 @@
     position: absolute;
     top: 0;
     left: 0;
-
     display: grid;
     place-items: center;
-
     width: 100%;
     height: 100%;
-
     opacity: 0;
-
     background-color: var(--bg-cover);
-
     word-break: break-all;
     border-radius: 50%;
-
     transition: opacity 0.2s;
 
     .text-hint {
       display: flex;
       flex-direction: column;
       align-items: center;
-
       font: var(--font-base);
       line-height: 1.6rem;
       color: var(--bg-primary);
@@ -88,13 +79,13 @@
 .profile-name {
   font: var(--font-m);
   font-weight: 600;
-
   margin-bottom: 6rem;
 }
 
 .profile-info-list {
   margin-bottom: 6rem;
 
+  /* stylelint-disable-next-line no-descending-specificity */
   .item-list {
     display: flex;
     justify-content: space-between;
@@ -121,6 +112,7 @@
 }
 
 .profile-actions-list {
+  /* stylelint-disable-next-line no-descending-specificity */
   .item-list {
     padding-bottom: 1rem;
 
@@ -137,7 +129,7 @@
 
     &:last-of-type {
       button {
-        color: #ff0000;
+        color: #f00;
       }
     }
   }
