@@ -1,4 +1,18 @@
-root = true
+root = true # Корневой файл EditorConfig
 
 [*]
-insert_final_newline = true
+# Определяет тип символа окончания строки
+# lf - в Unix = \n
+# crlf - в Windows = \r\n
+# cr - в старых системах: \r
+end_of_line = lf 
+
+insert_final_newline = true # Все файлы в конце должны закончиваться пустой строкой
+
+[*.js]
+indent_style = space # в качестве отступов используем пробел (space)
+indent_size = 2 # 1 отступ = 2 пробела
+
+# indent_style = space # tab в качестве отступов используем таб
+# tab_width = 2 # 1 таб = 2 пробела
+
