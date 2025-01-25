@@ -26,7 +26,11 @@ export default defineConfig({
     },
   },
   plugins: [
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     handlebars({
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
       partialDirectory: resolve(__dirname, "./src/partials"),
       content: { username: "Test" },
     }),
