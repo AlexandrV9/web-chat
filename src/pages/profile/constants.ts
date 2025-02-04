@@ -1,0 +1,70 @@
+import { IFieldInput } from '@/components';
+
+export const INPUT_FIELDS: IFieldInput[] = [
+  {
+    id: 'email',
+    name: 'email',
+    value: 'pochta@yandex.ru',
+    label: 'Почта',
+    disabled: true,
+  },
+  {
+    id: 'login',
+    name: 'login',
+    label: 'Логин',
+    value: 'ivanivanov',
+    disabled: true,
+  },
+  {
+    id: 'first_name',
+    name: 'first_name',
+    label: 'Имя',
+    value: 'Иван',
+    disabled: true,
+  },
+  {
+    id: 'second_name',
+    name: 'second_name',
+    label: 'Фамилия',
+    value: 'Иванов',
+    disabled: true,
+  },
+  {
+    id: 'display_name',
+    name: 'display_name',
+    label: 'Имя в чате',
+    value: 'Иван',
+    disabled: true,
+  },
+  {
+    id: 'phone',
+    name: 'phone',
+    label: 'Телефон',
+    value: '+7 (909) 967 30 30',
+    disabled: true,
+  },
+  {
+    id: 'oldPassword',
+    name: 'oldPassword',
+    type: 'password',
+    label: 'Старый пароль',
+    value: 'test',
+    disabled: true,
+  },
+  {
+    id: 'newPassword',
+    name: 'newPassword',
+    type: 'password',
+    label: 'Новый пароль',
+    value: 'test',
+    disabled: true,
+  },
+  {
+    id: 'newPasswordRepeat',
+    name: 'newPasswordRepeat',
+    type: 'password',
+    label: 'Повторите новый пароль',
+    value: 'test',
+    disabled: true,
+  },
+];

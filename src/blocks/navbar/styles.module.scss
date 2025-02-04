@@ -1,0 +1,33 @@
+.navbar {
+  display: grid;
+  place-items: center;
+  height: 5.5rem;
+  margin-top: auto;
+  border-top: var(--border-primary);
+  background: var(--bg-tertiary);
+}
+
+.navList {
+  display: flex;
+  justify-content: space-evenly;
+  color: var(--secondary-color);
+  width: 100%;
+}
+
+.navListItem {
+  transition: opacity 0.2s;
+
+  &:hover {
+    cursor: pointer;
+    opacity: 0.6;
+  }
+
+  a {
+    color: var(--text-secondary-color);
+  }
+
+  .navIcon {
+    width: 2.4rem;
+    height: 2.4rem;
+  }
+}

@@ -17,7 +17,7 @@ export default [
   ...tseslint.configs.recommended,
   {
     rules: {
-      'max-len': [2, 100],
+      'max-len': [2, 150],
       '@typescript-eslint/no-require-imports': 'off',
       '@typescript-eslint/no-unused-vars': 'warn',
     },
