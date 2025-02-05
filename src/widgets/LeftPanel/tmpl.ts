@@ -1,13 +1,10 @@
 import cls from './styles.module.scss';
 
-  // iconPath="/assets/icons/index.svg#users"
-  //           linkPath="/pages/home/index.html"
-
 const tmpl = `
-  <aside class="left-panel">
-    <section class="top">
+  <aside class=${cls.leftPanel}>
+    <section class=${cls.top}>
 
-      <h3 class="title">Чаты</h3>
+      <h3 class=${cls.title}>{{title}}</h3>
 
       <button class=${cls.btnEdit}>
         <svg fill="none" class="icon">
@@ -25,17 +22,11 @@ const tmpl = `
       />
     </div>
 
-    <ul class=${cls.chatList}>
-      <li class=${cls.chatListItem}>Чат 01</li>
-      <li class=${cls.chatListItem}>Чат 02</li>
-      <li class=${cls.chatListItem}>Чат 03</li>
-      <li class=${cls.chatListItem}>Чат 99</li>
-    </ul>
+    {{{Children}}}
 
-    {{{ navbar }}}
+    {{{Navbar}}}
 
   </aside>
 `;
 
 export default tmpl;
-

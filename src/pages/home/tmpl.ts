@@ -3,7 +3,7 @@ import cls from './styles.module.scss';
 const tmpl = `
   <div div class="page-content">
 
-    {{{ leftPanel }}}
+    {{{ LeftPanel }}}
 
     <section class=${cls.mainContainer}>
       <div class=${cls.top}>
@@ -23,11 +23,7 @@ const tmpl = `
         </div>
       </div>
 
-      <div class=${cls.main}>
-        <div class=${cls.fallbackContainer}>
-          <p>Выберите чат чтобы отправить сообщение</p>
-        </div>
-      </div>
+      {{{Children}}}
 
       <div class=${cls.bottom}>
         <form class=${cls.formSendMessage}>
@@ -57,3 +53,10 @@ const tmpl = `
 `;
 
 export default tmpl;
+
+
+// <div class=${cls.main}>
+// <div class=${cls.fallbackContainer}>
+//   <p>Выберите чат чтобы отправить сообщение</p>
+// </div>
+// </div>

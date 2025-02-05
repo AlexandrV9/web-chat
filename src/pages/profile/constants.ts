@@ -1,4 +1,4 @@
-import { IFieldInput } from '@/components';
+import { IFieldInput } from '@/shared';
 
 export const INPUT_FIELDS: IFieldInput[] = [
   {

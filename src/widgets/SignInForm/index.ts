@@ -1,21 +1,20 @@
-import { Button, FieldInput } from '@/components';
-import { Block } from '../../services/Block';
-
 import cls from './styles.module.scss';
 
 import tmpl from './tmpl';
 import { INPUT_FIELDS } from './constants';
+import { Button, FieldInput } from '@/components';
+import { Block } from '@/services/Block';
 
-interface SignUpFormProps {}
+interface SignInFormProps {}
 
-export class SignUpForm extends Block {
-  constructor(props: SignUpFormProps) {
+export class SignInForm extends Block {
+  constructor(props: SignInFormProps) {
     super('div', {
       ...props,
       Inputs: INPUT_FIELDS.map(item => new FieldInput(item)),
       SubmitButton: new Button({
         className: cls.btnSubmit,
-        children: 'Зарегистрироваться',
+        children: 'Войти',
         htmlType: 'submit',
       }),
     });

@@ -5,7 +5,7 @@ import tmpl from './tmpl';
 
 interface FieldInputProps extends InputProps {
   label?: string;
-  textError?: string;
+  textError?: string; 
   className?: string;
 }
 

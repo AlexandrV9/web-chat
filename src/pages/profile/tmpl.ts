@@ -2,10 +2,8 @@ import cls from './styles.module.scss';
 
 const tmpl = `
   <div class="page-content">
-    <aside class="left-panel">
-      <div class="top"><h3 class="title">Профиль</h3></div>
-      {{{ navbar }}}
-    </aside>
+
+    {{{LeftPanel}}}
 
     <div class=${cls.mainContainer}>
 

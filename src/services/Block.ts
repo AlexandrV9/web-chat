@@ -1,6 +1,6 @@
 import Handlebars from 'handlebars';
 import { EventBus } from './EventBus';
-import { generateUUID } from '../utils/generateUUID';
+import { generateUUID } from '@/shared';
 
 const checkPrivateProp = (prop: any) => prop.startsWith('_');
 

@@ -1,5 +1,5 @@
 import { HomePage, NotFoundPage, ProfilePage, ServerErrorPage, SignInPage, SignUpPage } from './pages';
-import { renderDOM } from './utils/renderDOM';
+import { renderDOM } from './shared';
 
 const signInPage = new SignInPage();
 const signUpPage = new SignUpPage();

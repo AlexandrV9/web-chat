@@ -1,8 +1,6 @@
 @use "./fonts";
 @use "./reset";
 @use "./variables";
-@use "./blocks/left-panel";
-@use "./blocks/navbar";
 
 html {
   font-family: var(--font-family-primary);
