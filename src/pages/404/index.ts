@@ -5,7 +5,7 @@ interface NotFoundPageProps {}
 
 export class NotFoundPage extends Block {
   constructor() {
-    super('div');
+    super({});
   }
 
   render() {

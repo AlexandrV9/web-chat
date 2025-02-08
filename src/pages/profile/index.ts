@@ -10,7 +10,7 @@ interface ProfilePageProps {}
 
 export class ProfilePage extends Block {
   constructor() {
-    super('div', {
+    super({
       LeftPanel: new LeftPanel({
         title: 'Профиль',
       }),

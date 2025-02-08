@@ -1,7 +1,7 @@
 import cls from './styles.module.scss';
 
 const tmpl = `
-  <form class=${cls.signInForm}>
+  <div class=${cls.signInForm}>
     <h3 class=${cls.title}>Вход</h3>
 
     {{{Inputs}}}
@@ -11,7 +11,7 @@ const tmpl = `
     <p class=${cls.linkWrapper}>
       <a href="../../pages/sign-up/index.html">Нет аккаунта?</a>
     </p>
-  </form>
+  </div>
 `;
 
 export default tmpl;

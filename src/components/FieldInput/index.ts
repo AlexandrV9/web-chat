@@ -13,7 +13,7 @@ export type IFieldInput = FieldInputProps;
 
 export class FieldInput extends Block {
   constructor({ label, textError = '', className = '', ...otherProps }: FieldInputProps) {
-    super('div', {
+    super({
       label,
       textError,
       htmlFor: otherProps.id,
@@ -21,6 +21,7 @@ export class FieldInput extends Block {
       input: new Input(otherProps),
     });
   }
+  
   render() {
     return tmpl;
   }

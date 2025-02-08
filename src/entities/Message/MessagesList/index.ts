@@ -8,7 +8,7 @@ const list = Array.from({ length: 30 }).map((_, index) => new MessageBubble({ is
 
 export class MessagesList extends Block {
   constructor({}: MessageBubbleProps) {
-    super('li', {
+    super({
       Children: list,
     });
   }

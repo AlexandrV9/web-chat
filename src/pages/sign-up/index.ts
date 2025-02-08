@@ -6,7 +6,7 @@ interface SignUpPageProps {}
 
 export class SignUpPage extends Block {
   constructor() {
-    super('div', {
+    super({
       content: new SignUpForm({}),
     });
   }

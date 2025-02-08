@@ -7,16 +7,22 @@ import { Block } from '@/services/Block';
 
 interface SignInFormProps {}
 
+const submitButton = new Button({
+  className: cls.btnSubmit,
+  children: 'Войти',
+  htmlType: 'submit',
+  onClick: e => {
+    e.preventDefault();
+    e.stopPropagation();
+  },
+});
+
 export class SignInForm extends Block {
   constructor(props: SignInFormProps) {
-    super('div', {
+    super({
       ...props,
       Inputs: INPUT_FIELDS.map(item => new FieldInput(item)),
-      SubmitButton: new Button({
-        className: cls.btnSubmit,
-        children: 'Войти',
-        htmlType: 'submit',
-      }),
+      SubmitButton: submitButton,
     });
   }
 

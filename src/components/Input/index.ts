@@ -12,7 +12,7 @@ export interface InputProps extends Partial<HTMLInputElement> {
 
 export class Input extends Block {
   constructor({ type = 'text', ...otherProps }: InputProps) {
-    super('div', { type, ...otherProps });
+    super({ type, ...otherProps });
   }
 
   render() {

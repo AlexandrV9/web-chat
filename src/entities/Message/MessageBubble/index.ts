@@ -9,7 +9,7 @@ interface MessageBubbleProps {
 
 export class MessageBubble extends Block {
   constructor({ isMy = false }: MessageBubbleProps) {
-    super('li', { className: isMy ? cls.my : '' });
+    super({ className: isMy ? cls.my : '' });
   }
 
   render() {

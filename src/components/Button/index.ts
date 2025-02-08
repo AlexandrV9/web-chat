@@ -5,11 +5,17 @@ interface ButtonProps extends Omit<Partial<HTMLButtonElement>, 'children' | 'cla
   className?: string;
   children?: string;
   htmlType?: HTMLButtonElement['type'];
+  onClick?: (e: MouseEvent) => void;
 }
 
 export class Button extends Block {
-  constructor(props: ButtonProps) {
-    super('button', props);
+  constructor({ onClick, ...otherProps }: ButtonProps) {
+    super({
+      events: {
+        click: onClick,
+      },
+      ...otherProps,
+    });
   }
 
   render() {

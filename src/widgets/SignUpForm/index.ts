@@ -10,7 +10,7 @@ interface SignUpFormProps {}
 
 export class SignUpForm extends Block {
   constructor(props: SignUpFormProps) {
-    super('div', {
+    super({
       ...props,
       Inputs: INPUT_FIELDS.map(item => new FieldInput(item)),
       SubmitButton: new Button({

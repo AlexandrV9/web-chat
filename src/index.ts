@@ -2,10 +2,10 @@ import { HomePage, NotFoundPage, ProfilePage, ServerErrorPage, SignInPage, SignU
 import { renderDOM } from './shared';
 
 const signInPage = new SignInPage();
-const signUpPage = new SignUpPage();
-const notFoundPage = new NotFoundPage();
-const serverErrorPage = new ServerErrorPage();
-const homePage = new HomePage();
-const profilePage = new ProfilePage();
+// const signUpPage = new SignUpPage();
+// const notFoundPage = new NotFoundPage();
+// const serverErrorPage = new ServerErrorPage();
+// const homePage = new HomePage();
+// const profilePage = new ProfilePage();
 
-renderDOM('.app', profilePage);
+renderDOM('.app', signInPage);

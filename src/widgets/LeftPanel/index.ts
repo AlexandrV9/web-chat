@@ -9,7 +9,7 @@ interface LeftPanelProps {
 
 export class LeftPanel extends Block {
   constructor({ title = '' }: LeftPanelProps) {
-    super('div', {
+    super({
       title,
 
       Children: new ChatsList(),

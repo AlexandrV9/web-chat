@@ -8,7 +8,7 @@ interface HomePageProps {}
 
 export class HomePage extends Block {
   constructor() {
-    super('div', {
+    super({
       LeftPanel: new LeftPanel({
         title: 'Чаты',
       }),

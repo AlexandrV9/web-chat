@@ -8,7 +8,7 @@ const list = Array.from({ length: 15 }).map(() => new ChatsItem({}))
 
 export class ChatsList extends Block {
   constructor() {
-    super('ul', {
+    super({
       Children: list,
     });
   }

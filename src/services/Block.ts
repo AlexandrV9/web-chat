@@ -4,7 +4,7 @@ import { generateUUID } from '@/shared';
 
 const checkPrivateProp = (prop: any) => prop.startsWith('_');
 
-export type BlockProps = Record<string, unknown>;
+export type BlockProps = Record<string, any>;
 
 export type TypeLists = Record<string, { id: string; children: unknown[] }>;
 
@@ -16,22 +16,19 @@ export class Block {
     FLOW_RENDER: 'flow:render',
   };
 
-  _children: Record<string, Block>;
-  _lists: TypeLists;
-  _element: HTMLElement | null = null;
   _id: string;
 
-  _meta: any = {
-    tag: '',
-    props: {},
-  };
-
-  _eventBus: EventBus;
+  _element: HTMLElement | null = null;
 
   props: BlockProps;
 
-  constructor(tag = 'div', props = {}) {
-    this._meta = { tag, props };
+  _children: Record<string, Block>;
+
+  _lists: TypeLists;
+
+  _eventBus: EventBus;
+
+  constructor(props = {}) {
     this._eventBus = new EventBus();
 
     const { children, _lists, _props } = this._getCorrectProps(props);
@@ -55,18 +52,12 @@ export class Block {
   // **************** Инициализация ****************
 
   init() {
-    this._element = this._createDocumentElement(this._meta?.tag);
     this._eventBus.emit(Block.EVENTS.FLOW_RENDER);
   }
 
   _createDocumentElement(tag: string) {
-    // Можно сделать метод, который через фрагменты в цикле создаёт сразу несколько блоков
     return document.createElement(tag);
   }
-
-  //
-
-  //
 
   // **************** Рендер ****************
 
@@ -112,9 +103,14 @@ export class Block {
       }
     });
 
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    this._element = fragment.content.cloneNode(true);
+    const parentElement = fragment.content.firstElementChild as HTMLElement;
+
+    if (parentElement && this._element) {
+      this._element.replaceWith(parentElement);
+    }
+
+    this._element = parentElement;
+    this.addEvents();
   }
 
   render(): string {
@@ -149,10 +145,6 @@ export class Block {
     };
   }
 
-  //
-
-  //
-
   // **************** Монтирование ****************
 
   _componentDidMount(oldProps: BlockProps) {
@@ -164,10 +156,6 @@ export class Block {
   dispatchComponentDidMount() {
     this._eventBus.emit(Block.EVENTS.FLOW_CDM);
   }
-
-  //
-
-  //
 
   // **************** Обновление ****************
 
@@ -184,19 +172,19 @@ export class Block {
     return true;
   }
 
-  //
-
-  //
-
   // **************** Работа с событиями ****************
 
-  addEvents() {}
+  addEvents() {
+    const { events = {} } = this.props;
+
+    if(!events || !this._element) return;
+
+    Object.keys(events).forEach((eventName) => {
+      this._element?.addEventListener(eventName, events[eventName])
+    })
+  }
 
   removeEvents() {}
-
-  //
-
-  //
 
   getContent() {
     return this._element;
@@ -210,33 +198,24 @@ export class Block {
     Object.assign(this.props, nextProps);
   };
 
-  _makePropsProxy<T extends object>(props: T) {
-    // Можно и так передать this
-    // Такой способ больше не применяется с приходом ES6+
+  private _makePropsProxy(props: any): any {
+    // eslint-disable-next-line @typescript-eslint/no-this-alias
     const self = this;
 
     return new Proxy(props, {
-      get(target, property) {
-        if (checkPrivateProp(property)) {
-          throw new Error('Нет прав');
-        } else {
-          const value = target[property];
-          return typeof value === 'function' ? value.bind(target) : value;
-        }
+      get(target: any, prop: string) {
+        const value = target[prop];
+        return typeof value === "function" ? value.bind(target) : value;
       },
+      set(target: any, prop: string, value: any) {
+        const oldTarget = { ...target };
 
-      set(target, property, newValue) {
-        if (checkPrivateProp(property)) {
-          throw new Error('Нет прав');
-        } else {
-          const oldTarget = { ...target };
-
-          target[property] = newValue;
-
-          self.eventBus.emit(Block.EVENTS.FLOW_CDU, oldTarget, target);
-
-          return true;
-        }
+        target[prop] = value;
+        self._eventBus.emit(Block.EVENTS.FLOW_CDU, oldTarget, target);
+        return true;
+      },
+      deleteProperty() {
+        throw new Error("No access");
       },
     });
   }

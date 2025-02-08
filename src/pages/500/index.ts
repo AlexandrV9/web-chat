@@ -5,7 +5,7 @@ interface ServerErrorPageProps {}
 
 export class ServerErrorPage extends Block {
   constructor() {
-    super('div');
+    super({});
   }
 
   render() {

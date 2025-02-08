@@ -6,7 +6,7 @@ interface SignInPageProps {}
 
 export class SignInPage extends Block {
   constructor() {
-    super('div', {
+    super({
       content: new SignInForm({}),
     });
   }
