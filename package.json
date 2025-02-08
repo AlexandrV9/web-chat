@@ -15,7 +15,7 @@
     "stylelint": "npx stylelint \"**/*.{css,scss}\"",
     "stylelint:fix": "npx stylelint \"**/*.{css,scss}\" --fix",
     "prebuild": "tsc --noEmit",
-    "build": "npm run prebuild && vite build",
+    "build": "vite build",
     "preview": "vite preview"
   },
   "devDependencies": {
