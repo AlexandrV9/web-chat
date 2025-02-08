@@ -9,11 +9,12 @@ interface ButtonProps extends Omit<Partial<HTMLButtonElement>, 'children' | 'cla
 }
 
 export class Button extends Block {
-  constructor({ onClick, ...otherProps }: ButtonProps) {
+  constructor({ onClick, id = "", ...otherProps }: ButtonProps) {
     super({
       events: {
         click: onClick,
       },
+      id,
       ...otherProps,
     });
   }

@@ -1,12 +1,14 @@
-import { IFieldInput } from '@/shared';
+import { emailValidator, firstNameValidator, lastNameValidator, loginValidator, passwordValidator, phoneValidator } from '@/services/Validator';
 
-export const INPUT_FIELDS: IFieldInput[] = [
+export const INPUT_FIELDS = [
   {
     id: 'email',
     name: 'email',
     value: 'pochta@yandex.ru',
     label: 'Почта',
     disabled: true,
+    textError: '',
+    validator: emailValidator,
   },
   {
     id: 'login',
@@ -14,6 +16,7 @@ export const INPUT_FIELDS: IFieldInput[] = [
     label: 'Логин',
     value: 'ivanivanov',
     disabled: true,
+    validator: loginValidator,
   },
   {
     id: 'first_name',
@@ -21,6 +24,7 @@ export const INPUT_FIELDS: IFieldInput[] = [
     label: 'Имя',
     value: 'Иван',
     disabled: true,
+    validator: firstNameValidator,
   },
   {
     id: 'second_name',
@@ -28,6 +32,7 @@ export const INPUT_FIELDS: IFieldInput[] = [
     label: 'Фамилия',
     value: 'Иванов',
     disabled: true,
+    validator: lastNameValidator,
   },
   {
     id: 'display_name',
@@ -35,6 +40,7 @@ export const INPUT_FIELDS: IFieldInput[] = [
     label: 'Имя в чате',
     value: 'Иван',
     disabled: true,
+    validator: lastNameValidator,
   },
   {
     id: 'phone',
@@ -42,6 +48,7 @@ export const INPUT_FIELDS: IFieldInput[] = [
     label: 'Телефон',
     value: '+7 (909) 967 30 30',
     disabled: true,
+    validator: phoneValidator,
   },
   {
     id: 'oldPassword',
@@ -58,6 +65,7 @@ export const INPUT_FIELDS: IFieldInput[] = [
     label: 'Новый пароль',
     value: 'test',
     disabled: true,
+    validator: passwordValidator,
   },
   {
     id: 'newPasswordRepeat',
@@ -66,5 +74,6 @@ export const INPUT_FIELDS: IFieldInput[] = [
     label: 'Повторите новый пароль',
     value: 'test',
     disabled: true,
+    validator: () => '',
   },
 ];

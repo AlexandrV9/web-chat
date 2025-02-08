@@ -6,8 +6,6 @@ import { Block } from '@/services/Block';
 import { FieldInput } from '@/components';
 import { LeftPanel } from '@/widgets';
 
-interface ProfilePageProps {}
-
 export class ProfilePage extends Block {
   constructor() {
     super({

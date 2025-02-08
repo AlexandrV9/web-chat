@@ -6,10 +6,12 @@ const tmpl = `
 
     {{{Inputs}}}
 
+    <span class=${cls.error}>Некоторые поля формы заполнены не верно</span>
+
     {{{SubmitButton}}}
 
     <p class=${cls.linkWrapper}>
-      <a href="../../pages/sign-in/index.html">Войти</a>
+      <a data-page="signIn">Войти</a>
     </p>
   </form>
 `;

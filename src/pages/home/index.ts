@@ -2,9 +2,7 @@ import { MessagesList } from '@/entities';
 import { Block } from '@/services/Block';
 
 import tmpl from './tmpl';
-import { LeftPanel } from '@/widgets';
-
-interface HomePageProps {}
+import { LeftPanel, SendMessageForm } from '@/widgets';
 
 export class HomePage extends Block {
   constructor() {
@@ -12,7 +10,8 @@ export class HomePage extends Block {
       LeftPanel: new LeftPanel({
         title: 'Чаты',
       }),
-      Children: new MessagesList({}),
+      SendMessageForm: new SendMessageForm(),
+      Children: new MessagesList(),
     });
   }
 

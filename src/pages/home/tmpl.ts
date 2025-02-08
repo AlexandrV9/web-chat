@@ -26,26 +26,7 @@ const tmpl = `
       {{{Children}}}
 
       <div class=${cls.bottom}>
-        <form class=${cls.formSendMessage}>
-          <button class=${cls.btnAttach}>
-
-            <svg fill="none" class="icon">
-              <use href="/assets/icons/index.svg#paper-clip"></use>
-            </svg>
-
-          </button>
-
-          <input class=${cls.inpTextMessage} placeholder="Введите сообщение..." name="message" />
-
-          <button class=${cls.btnSendMessage}>
-
-            <svg fill="none" class="icon">
-              <use href="/assets/icons/index.svg#arrow-right"></use>
-            </svg>
-
-
-          </button>
-        </form>
+        {{{SendMessageForm}}}
       </div>
     </section>
 
@@ -53,7 +34,6 @@ const tmpl = `
 `;
 
 export default tmpl;
-
 
 // <div class=${cls.main}>
 // <div class=${cls.fallbackContainer}>

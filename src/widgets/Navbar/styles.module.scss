@@ -16,18 +16,23 @@
 
 .navListItem {
   transition: opacity 0.2s;
+  display: flex;
+  align-items: center;
+  height: 2.4rem;
+  padding: 0;
 
   &:hover {
     cursor: pointer;
     opacity: 0.6;
   }
 
-  a {
-    color: var(--text-secondary-color);
-  }
-
   .navIcon {
     width: 2.4rem;
     height: 2.4rem;
   }
+}
+
+.navLink {
+  height: 24px;
+  color: var(--text-secondary-color);
 }

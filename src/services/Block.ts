@@ -1,8 +1,8 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-this-alias */
 import Handlebars from 'handlebars';
 import { EventBus } from './EventBus';
 import { generateUUID } from '@/shared';
-
-const checkPrivateProp = (prop: any) => prop.startsWith('_');
 
 export type BlockProps = Record<string, any>;
 
@@ -151,6 +151,8 @@ export class Block {
     this.componentDidMount(oldProps);
   }
 
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
   componentDidMount(oldProps: BlockProps) {}
 
   dispatchComponentDidMount() {
@@ -167,7 +169,8 @@ export class Block {
     this._render();
   }
 
-  // Может переопределять пользователь, необязательно трогать
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
   componentDidUpdate(oldProps: BlockProps, newProps: BlockProps) {
     return true;
   }
@@ -177,17 +180,21 @@ export class Block {
   addEvents() {
     const { events = {} } = this.props;
 
-    if(!events || !this._element) return;
+    if (!events || !this._element) return;
 
-    Object.keys(events).forEach((eventName) => {
-      this._element?.addEventListener(eventName, events[eventName])
-    })
+    Object.keys(events).forEach(eventName => {
+      this._element?.addEventListener(eventName, events[eventName]);
+    });
   }
 
   removeEvents() {}
 
   getContent() {
     return this._element;
+  }
+
+  getProp(name: string) {
+    return this.props[name];
   }
 
   setProps = (nextProps: BlockProps) => {
@@ -198,14 +205,13 @@ export class Block {
     Object.assign(this.props, nextProps);
   };
 
-  private _makePropsProxy(props: any): any {
-    // eslint-disable-next-line @typescript-eslint/no-this-alias
+  private _makePropsProxy(props: any) {
     const self = this;
 
     return new Proxy(props, {
       get(target: any, prop: string) {
         const value = target[prop];
-        return typeof value === "function" ? value.bind(target) : value;
+        return typeof value === 'function' ? value.bind(target) : value;
       },
       set(target: any, prop: string, value: any) {
         const oldTarget = { ...target };
@@ -215,7 +221,7 @@ export class Block {
         return true;
       },
       deleteProperty() {
-        throw new Error("No access");
+        throw new Error('No access');
       },
     });
   }

@@ -8,11 +8,20 @@ export interface InputProps extends Partial<HTMLInputElement> {
   id?: string;
   value?: string;
   disabled?: boolean;
+  onBlur?: (e: FocusEvent) => void;
+  onChange?: (e: InputEvent) => void;
 }
 
 export class Input extends Block {
-  constructor({ type = 'text', ...otherProps }: InputProps) {
-    super({ type, ...otherProps });
+  constructor({ type = 'text', onBlur, onChange, ...otherProps }: InputProps) {
+    super({
+      ...otherProps,
+      type,
+      events: {
+        blur: onBlur,
+        change: onChange,
+      },
+    });
   }
 
   render() {

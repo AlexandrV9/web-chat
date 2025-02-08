@@ -13,18 +13,14 @@ const tmpl = `
       </li>
 
       <li class=${cls.navListItem}>
-        <a class="nav-link" href="#2">
-          <svg class=${cls.navIcon} fill="none">
-            <use href="/assets/icons/index.svg#chat-bubble-left-right"></use>
-          </svg>
+        <a data-page="home">
+          home
         </a>
       </li>
 
       <li class=${cls.navListItem}>
-        <a class="nav-link" href="#3">
-          <svg class=${cls.navIcon} fill="none">
-            <use href="/assets/icons/index.svg#user-circle"></use>
-          </svg>
+        <a data-page="profile">
+          profile
         </a>
       </li>
 

@@ -4,25 +4,45 @@ import tmpl from './tmpl';
 import { INPUT_FIELDS } from './constants';
 import { Button, FieldInput } from '@/components';
 import { Block } from '@/services/Block';
-
-interface SignInFormProps {}
-
-const submitButton = new Button({
-  className: cls.btnSubmit,
-  children: 'Войти',
-  htmlType: 'submit',
-  onClick: e => {
-    e.preventDefault();
-    e.stopPropagation();
-  },
-});
+import { loginValidator, passwordValidator } from '@/services/Validator';
 
 export class SignInForm extends Block {
-  constructor(props: SignInFormProps) {
+  constructor() {
     super({
-      ...props,
+      events: {
+        submit: (e: Event) => {
+          e.preventDefault();
+          e.stopPropagation();
+
+          const formData = new FormData(e.target as HTMLFormElement);
+
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore
+          const values = Object.fromEntries(formData.entries());
+
+          let isValid = true;
+
+          isValid = !loginValidator(values.login);
+          isValid = !passwordValidator(values.password);
+
+          if (isValid) {
+            console.log(values);
+          } else {
+            const errorEl = document.querySelector(`.${cls.error}`);
+
+            if (errorEl) {
+              errorEl.classList.add(cls.visible);
+            }
+          }
+        },
+      },
       Inputs: INPUT_FIELDS.map(item => new FieldInput(item)),
-      SubmitButton: submitButton,
+      SubmitButton: new Button({
+        id: 'home',
+        className: cls.btnSubmit,
+        children: 'Войти',
+        htmlType: 'submit',
+      }),
     });
   }
 

@@ -8,6 +8,7 @@
   border-radius: 12px;
   background: var(--bg-primary);
   box-shadow: var(--shadow-primary);
+  position: relative;
 
   .title {
     font: var(--font-l);
@@ -75,5 +76,21 @@
     font: var(--font-s);
     font-weight: 500;
     color: var(--accent-color);
+  }
+}
+
+.error {
+  margin-top: auto;
+  text-align: center;
+  color: var(--text-alert-color);
+  position: absolute;
+  bottom: 12rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  display: none;
+
+  &.visible {
+    display: inline-block;
   }
 }

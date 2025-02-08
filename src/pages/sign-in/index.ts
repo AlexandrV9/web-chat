@@ -2,12 +2,10 @@ import { SignInForm } from '@/widgets';
 import { Block } from '../../services/Block';
 import tmpl from './tmpl';
 
-interface SignInPageProps {}
-
 export class SignInPage extends Block {
   constructor() {
     super({
-      content: new SignInForm({}),
+      content: new SignInForm(),
     });
   }
 

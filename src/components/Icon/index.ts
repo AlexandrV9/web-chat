@@ -8,7 +8,7 @@ interface IconProps {
 
 export class Icon extends Block {
   constructor(props: IconProps) {
-    super('div', props);
+    super(props);
   }
 
   render() {
