@@ -14,7 +14,8 @@
     "eslint:fix": "npx eslint .--fix",
     "stylelint": "npx stylelint \"**/*.{css,scss}\"",
     "stylelint:fix": "npx stylelint \"**/*.{css,scss}\" --fix",
-    "build": "vite build",
+    "prebuild": "tsc --noEmit",
+    "build": "npm run prebuild && vite build",
     "preview": "vite preview"
   },
   "devDependencies": {
@@ -24,6 +25,7 @@
     "globals": "^15.14.0",
     "stylelint": "^16.13.2",
     "stylelint-config-standard-scss": "^14.0.0",
+    "typescript": "^5.7.3",
     "typescript-eslint": "^8.21.0",
     "vite": "^6.0.5"
   },
