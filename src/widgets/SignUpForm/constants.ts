@@ -50,6 +50,7 @@ export const INPUT_FIELDS = [
     value: '',
     type: 'password',
     textError: '',
+    autocomplete: false,
     validator: loginValidator,
   },
   {
@@ -58,6 +59,7 @@ export const INPUT_FIELDS = [
     label: 'Пароль (ещё раз)',
     value: '',
     type: 'password',
+    autocomplete: false,
     textError: 'Пароли не совпадают',
     validator: () => '',
   },

@@ -7,6 +7,7 @@ interface FieldInputProps extends InputProps {
   label?: string;
   textError?: string;
   className?: string;
+  autocomplete?: boolean;
   validator?: (value: string) => string;
 }
 

@@ -16,6 +16,7 @@ export const INPUT_FIELDS = [
     label: 'Пароль',
     value: '',
     type: 'password',
+    autocomplete: false,
     textError: '',
     validator: passwordValidator,
   },

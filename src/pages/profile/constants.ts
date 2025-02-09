@@ -57,6 +57,7 @@ export const INPUT_FIELDS = [
     label: 'Старый пароль',
     value: 'test',
     disabled: true,
+    autocomplete: false,
   },
   {
     id: 'newPassword',
@@ -66,6 +67,7 @@ export const INPUT_FIELDS = [
     value: 'test',
     disabled: true,
     validator: passwordValidator,
+    autocomplete: false,
   },
   {
     id: 'newPasswordRepeat',
@@ -74,6 +76,7 @@ export const INPUT_FIELDS = [
     label: 'Повторите новый пароль',
     value: 'test',
     disabled: true,
+    autocomplete: false,
     validator: () => '',
   },
 ];

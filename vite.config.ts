@@ -5,6 +5,7 @@ import handlebars from 'vite-plugin-handlebars';
 export default defineConfig({
   root: resolve(__dirname, './src'),
   build: {
+    assetsInlineLimit: 0,
     outDir: resolve(__dirname, './dist'),
     emptyOutDir: true,
     rollupOptions: {
@@ -18,6 +19,8 @@ export default defineConfig({
       localsConvention: 'camelCaseOnly',
     },
   },
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
   plugins: [handlebars()],
   server: {
     port: 3000,
