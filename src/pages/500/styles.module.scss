@@ -1,0 +1,28 @@
+.codeError,
+.description,
+.wrapperLink {
+  text-align: center;
+}
+
+.codeError {
+  font-size: 4rem;
+  line-height: 4.8rem;
+  font-weight: 500;
+  margin-bottom: 2rem;
+}
+
+.description {
+  font: var(--font-l);
+  margin-bottom: 7rem;
+}
+
+.wrapperLink {
+  color: var(--accent-color);
+  font: var(--font-m);
+  cursor: pointer;
+  transition: opacity 0.2s;
+
+  &:hover {
+    opacity: 0.6;
+  }
+}

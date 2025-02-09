@@ -1,0 +1,66 @@
+.chatItem {
+  padding: 1.2rem 0.2rem;
+  border-top: var(--border-primary);
+  display: flex;
+  gap: 0.8rem;
+}
+
+.avatar {
+  width: 4.8rem;
+  height: 4.8rem;
+  display: grid;
+  place-items: center;
+  background: var(--bg-tertiary);
+  border-radius: 50%;
+  color: var(--secondary-color);
+  font: var(--font-m);
+  flex-shrink: 0;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.content {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.titleWrapper {
+  display: flex;
+  gap: 2px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.counter {
+  height: 2rem;
+  min-width: 2rem;
+  border-radius: 12px;
+  padding: 0 0.2rem;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  font: var(--font-s);
+  font-weight: 500;
+  color: var(--text-invert-primary-color);
+  background-color: var(--bg-accent);
+}
+
+.title {
+  font: var(--font-base);
+  font-weight: 600;
+  color: var(--primary-color);
+}
+
+.time {
+  font-size: var(--font-xxs);
+  color: var(--secondary-color);
+}
+
+.message {
+  color: var(--secondary-color);
+}
