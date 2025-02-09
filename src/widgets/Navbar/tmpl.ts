@@ -7,7 +7,7 @@ const tmpl = `
       <li class=${cls.navListItem}>
         <a class="nav-link" href="#1">
           <svg class=${cls.navIcon} fill="none">
-            <use href="/assets/icons/index.svg#users"></use>
+            <use href="./assets/icons/index.svg#users"></use>
           </svg>
         </a>
       </li>
