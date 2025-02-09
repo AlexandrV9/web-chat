@@ -8,7 +8,10 @@ export type BlockProps = Record<string, any>;
 
 export type TypeLists = Record<string, { id: string; children: unknown[] }>;
 
-export class Block {
+
+// TODO: сделать передачу тип пропсов в виде дженерика в Block,
+// подумать над насчёт abstract
+export abstract class Block {
   static EVENTS = {
     INIT: 'init',
     FLOW_CDM: 'flow:component-did-mount',
@@ -62,6 +65,8 @@ export class Block {
   // **************** Рендер ****************
 
   _render() {
+    this._removeEvents();
+
     const tmpl = this.render();
 
     const buffer = { ...this._children, ...this.props };
@@ -187,7 +192,15 @@ export class Block {
     });
   }
 
-  removeEvents() {}
+  _removeEvents() {
+    const { events = {} } = this.props;
+
+    Object.keys(events).forEach((eventName) => {
+      if (events[eventName] !== undefined) {
+        this._element?.removeEventListener(eventName, events[eventName]);
+      }
+    });
+  }
 
   getContent() {
     return this._element;
