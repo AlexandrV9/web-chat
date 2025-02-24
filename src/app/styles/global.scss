@@ -1,9 +1,6 @@
-@import url(./fonts.scss);
-@import url(./reset.scss);
-@import url(./variables.scss);
-
-@import url(./blocks/left-panel.scss);
-@import url(./blocks/navbar.scss);
+@use "./fonts";
+@use "./reset";
+@use "./variables";
 
 html {
   font-family: var(--font-family-primary);
@@ -29,10 +26,9 @@ svg {
   height: 100%;
 }
 
-.app {
+#app {
   width: 100%;
   height: 100%;
-
   display: grid;
   place-items: center;
 }
@@ -52,9 +48,8 @@ svg {
   display: flex;
   flex-direction: column;
   gap: 10px;
-
   font-size: 1.6rem;
-  background-color: rgb(178, 178, 178);
+  background-color: rgb(178 178 178);
 
   ul li {
     &:not(:last-of-type) {
