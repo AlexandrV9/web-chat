@@ -1,7 +1,7 @@
-import { Block } from '@/services/Block';
+import { Block } from '@/shared/services/Block';
 import tmpl from './tmpl';
 
-import cls from "./styles.module.scss"
+import cls from './styles.module.scss';
 
 interface MessageBubbleProps {
   isMy?: boolean;

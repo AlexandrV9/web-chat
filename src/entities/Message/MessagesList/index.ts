@@ -1,4 +1,4 @@
-import { Block } from '@/services/Block';
+import { Block } from '@/shared/services/Block';
 import tmpl from './tmpl';
 import { MessageBubble } from '../MessageBubble';
 

@@ -1,6 +1,6 @@
 import cls from './styles.module.scss';
 
-const tmpl = `
+export const tmpl = `
   <div class="page-content">
 
     {{{LeftPanel}}}
@@ -11,7 +11,7 @@ const tmpl = `
         <div class=${cls.fallbackUserAvatar}>
 
           <svg fill="none" class="icon">
-            <use href="/assets/icons/index.svg#image"></use>
+            <use href="shared/assets/icons/index.svg#image"></use>
           </svg>
 
         </div>
@@ -26,24 +26,20 @@ const tmpl = `
         <input type="file" name="avatar" class="inp-avatar" />
       </label>
 
-      <h3 class=${cls.profileName}>Иван</h3>
+      <h3 class=${cls.profileName}>{{profileName}}</h3>
 
       <form>
         <ul class=${cls.profileInfoList}>
-
           {{{Inputs}}}
-
         </ul>
-
         <ul class=${cls.profileActionsList}>
           <li class=${cls.itemList}><button>Изменить данные</button></li>
           <li class=${cls.itemList}><button>Изменить пароль</button></li>
-          <li class=${cls.itemList}><button>Выйти</button></li>
+          <li class=${cls.itemList}>
+            {{{SignOutButton}}}
+          </li>
         </ul>
-
       </form>
     </div>
   </div>
 `;
-
-export default tmpl;

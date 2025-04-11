@@ -1,11 +1,11 @@
 import cls from './styles.module.scss';
 
-const tmpl = `
+export const tmpl = `
   <form class=${cls.formSendMessage}>
 
     <button class=${cls.btnAttach}>
       <svg fill="none" class="icon">
-        <use href="/assets/icons/index.svg#paper-clip"></use>
+        <use href="/shared/assets/icons/index.svg#paper-clip"></use>
       </svg>
     </button>
 
@@ -13,12 +13,11 @@ const tmpl = `
 
     <button class=${cls.btnSendMessage}>
       <svg fill="none" class="icon">
-        <use href="/assets/icons/index.svg#arrow-right"></use>
+        <use href="/shared/assets/icons/index.svg#arrow-right"></use>
       </svg>
     </button>
 
   </form>
 `;
 
-export default tmpl;
 

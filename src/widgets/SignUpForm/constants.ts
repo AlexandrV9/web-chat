@@ -1,4 +1,4 @@
-import { emailValidator, firstNameValidator, lastNameValidator, loginValidator, phoneValidator } from '@/services/Validator';
+import { emailValidator, firstNameValidator, lastNameValidator, loginValidator, phoneValidator } from '@/shared/services/Validator';
 
 export const INPUT_FIELDS = [
   {

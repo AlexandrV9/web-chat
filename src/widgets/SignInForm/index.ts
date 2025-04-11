@@ -2,15 +2,18 @@ import cls from './styles.module.scss';
 
 import tmpl from './tmpl';
 import { INPUT_FIELDS } from './constants';
-import { Button, FieldInput } from '@/components';
-import { Block } from '@/services/Block';
-import { loginValidator, passwordValidator } from '@/services/Validator';
+import { Button, FieldInput } from '@/shared/ui';
+import { Block } from '@/shared/services/Block';
+import { loginValidator, passwordValidator } from '@/shared/services/Validator';
+import { navigate } from '@/shared/utils';
+import { APP_ROUTES } from '@/shared/constants';
+import { AuthAPI } from '@/shared/api';
 
 export class SignInForm extends Block {
   constructor() {
     super({
       events: {
-        submit: (e: Event) => {
+        submit: async (e: Event) => {
           e.preventDefault();
           e.stopPropagation();
 
@@ -22,11 +25,17 @@ export class SignInForm extends Block {
 
           let isValid = true;
 
-          isValid = !loginValidator(values.login);
-          isValid = !passwordValidator(values.password);
+          // isValid = !loginValidator(values.login);
+          // isValid = !passwordValidator(values.password);
 
           if (isValid) {
             console.log(values);
+
+            const res = await AuthAPI.signIn(values as any);
+
+            if (res.ok) {
+              navigate(APP_ROUTES.CONVERSATIONS);
+            }
           } else {
             const errorEl = document.querySelector(`.${cls.error}`);
 

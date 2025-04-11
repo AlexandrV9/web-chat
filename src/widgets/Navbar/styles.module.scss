@@ -21,6 +21,11 @@
   height: 2.4rem;
   padding: 0;
 
+  img {
+    width: 24px;
+    height: 24px;
+  }
+
   &:hover {
     cursor: pointer;
     opacity: 0.6;

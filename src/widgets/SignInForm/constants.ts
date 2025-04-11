@@ -1,4 +1,4 @@
-import { loginValidator, passwordValidator } from '@/services/Validator';
+import { loginValidator, passwordValidator } from '@/shared/services/Validator';
 
 export const INPUT_FIELDS = [
   {
@@ -8,7 +8,7 @@ export const INPUT_FIELDS = [
     value: '',
     type: 'text',
     textError: '',
-    validator: loginValidator,
+    // validator: loginValidator,
   },
   {
     id: 'password',
@@ -18,6 +18,6 @@ export const INPUT_FIELDS = [
     type: 'password',
     autocomplete: false,
     textError: '',
-    validator: passwordValidator,
+    // validator: passwordValidator,
   },
 ];

@@ -1,20 +1,20 @@
-import cls from './styles.module.scss';
+import { APP_ROUTES } from '@/shared/constants';
+import styles from './styles.module.scss';
 
 const tmpl = `
-  <form class=${cls.signInForm}>
-    <h3 class=${cls.title}>Вход</h3>
+  <form class=${styles.signInForm} novalidate>
+    <h3 class=${styles.title}>Вход</h3>
 
     {{{Inputs}}}
     
-   <span class=${cls.error}>Некоторые поля формы заполнены не верно</span>
+    <span class=${styles.error}>Некоторые поля формы заполнены не верно</span>
 
     {{{SubmitButton}}}
 
-    <p class=${cls.linkWrapper}>
-      <a data-page="signUp" href="#">Нет аккаунта?</a>
+    <p class=${styles.linkWrapper}>
+      <a href=${APP_ROUTES.SIGN_UP}>Нет аккаунта?</a>
     </p>
   </form>
 `;
 
 export default tmpl;
-

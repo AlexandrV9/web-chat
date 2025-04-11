@@ -142,18 +142,12 @@
     button {
       font: var(--font-m);
       font-weight: 600;
-      color: var(--text-accent-color);
+      // color: var(--text-accent-color);
     }
 
     &:not(:last-of-type) {
       border-bottom: var(--border-primary);
       margin-bottom: 1rem;
-    }
-
-    &:last-of-type {
-      button {
-        color: #f00;
-      }
     }
   }
 }

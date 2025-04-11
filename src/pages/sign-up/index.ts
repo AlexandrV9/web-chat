@@ -1,6 +1,6 @@
 import { SignUpForm } from '@/widgets';
-import { Block } from '../../services/Block';
-import tmpl from './tmpl';
+import { Block } from '@/shared/services';
+import { tmpl } from './tmpl';
 
 export class SignUpPage extends Block {
   constructor() {

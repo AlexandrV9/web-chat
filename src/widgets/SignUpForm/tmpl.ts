@@ -1,17 +1,18 @@
-import cls from './styles.module.scss';
+import { APP_ROUTES } from '@/shared/constants';
+import styles from './styles.module.scss';
 
 const tmpl = `
-  <form class=${cls.signUpForm}>
-    <h3 class=${cls.title}>Регистрация</h3>
+  <form class=${styles.signUpForm}>
+    <h3 class=${styles.title}>Регистрация</h3>
 
     {{{Inputs}}}
 
-    <span class=${cls.error}>Некоторые поля формы заполнены не верно</span>
+    <span class=${styles.error}>Некоторые поля формы заполнены не верно</span>
 
     {{{SubmitButton}}}
 
-    <p class=${cls.linkWrapper}>
-      <a data-page="signIn">Войти</a>
+    <p class=${styles.linkWrapper}>
+      <a data-page="signIn" href=${APP_ROUTES.SIGN_IN}>Войти</a>
     </p>
   </form>
 `;

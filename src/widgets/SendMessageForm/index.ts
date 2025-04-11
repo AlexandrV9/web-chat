@@ -1,6 +1,6 @@
-import { Block } from '../../services/Block';
-import tmpl from './tmpl';
-import { Input } from '@/components';
+import { Block } from '@/shared/services';
+import { tmpl } from './tmpl';
+import { Input } from '@/shared/ui';
 
 import cls from './styles.module.scss';
 
