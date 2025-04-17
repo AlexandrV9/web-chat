@@ -1,20 +1,18 @@
-import { APP_ROUTES } from '@/shared/constants';
-import styles from './styles.module.scss';
+import { clsx } from '@/shared/utils';
+import styles from './SignInForm.module.scss';
 
-const tmpl = `
+export const tmpl = (error: string) => `
   <form class=${styles.signInForm} novalidate>
     <h3 class=${styles.title}>Вход</h3>
 
-    {{{Inputs}}}
+    {{{ Inputs }}}
     
-    <span class=${styles.error}>Некоторые поля формы заполнены не верно</span>
+    <span class='${clsx(styles.error, { [styles.visible]: error })}'>{{errorForm}}</span>
 
-    {{{SubmitButton}}}
+    {{{ SubmitButton }}}
 
     <p class=${styles.linkWrapper}>
-      <a href=${APP_ROUTES.SIGN_UP}>Нет аккаунта?</a>
+     {{{linkToSignUpPage}}}
     </p>
   </form>
 `;
-
-export default tmpl;

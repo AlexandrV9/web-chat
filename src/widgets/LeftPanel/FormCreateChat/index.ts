@@ -17,7 +17,7 @@ export class FormCreateChat extends Block {
       sumitButton: new Button({
         children: 'Создать',
         className: styles.submitButton,
-        htmlType: 'submit',
+        type: "submit",
       }),
       events: {
         submit: async (e: Event) => {

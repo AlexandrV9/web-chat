@@ -1,19 +1,23 @@
-import { Block } from '@/shared/services';
+import { Block, router } from '@/shared/services';
+
+import styles from './Link.module.scss';
+import { clsx } from '@/shared/utils';
 
 interface LinkProps {
-  children?: Block;
-  href?: string;
+  children?: Block | string;
+  className?: string;
+  to?: string;
   onClick?: (e: MouseEvent) => void;
 }
 
 export class Link extends Block {
-  constructor({ onClick, href, ...props }: LinkProps) {
+  constructor({ onClick, ...props }: LinkProps) {
     super({
       events: {
         click: (e: MouseEvent) => {
           e.preventDefault();
-          window.history.pushState({}, '', href);
           onClick?.(e);
+          router.goByPathname(this.props.to);
         },
       },
       ...props,
@@ -22,7 +26,11 @@ export class Link extends Block {
 
   render() {
     return `
-      <a href={{href}}>
+      <a 
+        class='${clsx(styles.link, this.props.className)}'
+        href={{href}}
+        ${this.props.to ? 'href="{{to}}"' : ''}
+      >
         {{{children}}}
       </a>
     `;

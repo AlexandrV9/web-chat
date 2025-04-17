@@ -6,11 +6,11 @@
   max-height: 100vh;
   padding: 1rem 1rem 7rem;
   overflow: auto;
+}
 
-  form {
-    width: 100%;
-    max-width: 51rem;
-  }
+.form {
+  width: 100%;
+  max-width: 51rem;
 }
 
 .profileAvatar {
@@ -84,54 +84,6 @@
 
 .profileInfoList {
   margin-bottom: 6rem;
-
-  /* stylelint-disable-next-line no-descending-specificity */
-  .itemList {
-    display: flex;
-    flex-direction: row-reverse;
-    padding-bottom: 0.2rem;
-    gap: 1rem;
-    position: relative;
-
-    span {
-      position: absolute;
-      bottom: -2rem;
-      left: 0;
-      margin: 0;
-    }
-
-    label {
-      font: var(--font-m);
-      color: var(--primary-color);
-      position: static;
-    }
-
-    input {
-      background: transparent;
-      text-align: right;
-      flex: 1;
-      padding: 0;
-      border-bottom: none;
-
-      &:not(:placeholder-shown) + label,
-      &:focus + label {
-        top: 0;
-        font: var(--font-m);
-        font-weight: 400;
-      }
-    }
-
-    & > input:last-of-type {
-      color: var(--text-secondary-color);
-    }
-
-    font: var(--font-m);
-
-    &:not(:last-of-type) {
-      border-bottom: var(--border-primary);
-      margin-bottom: 2rem;
-    }
-  }
 }
 
 .profileActionsList {

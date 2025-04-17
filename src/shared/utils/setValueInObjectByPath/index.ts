@@ -16,5 +16,6 @@ export function setValueInObjectByPath(object: PlainObject | unknown, path: stri
     }),
     value as PlainObject,
   );
+
   return mergeTwoObjects(object as PlainObject, result);
 }

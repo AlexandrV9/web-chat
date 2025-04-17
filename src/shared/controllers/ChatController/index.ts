@@ -2,13 +2,21 @@ import { ChatsAPI } from '@/shared/api';
 import { store } from '@/shared/services';
 
 export class ChatController {
-  static getChats() {
+  static async getChats() {
     return ChatsAPI.getAll().then(res => {
-      store.set('chats', res.data);
+      store.setState({
+        chats: res.data,
+      });
     });
   }
 
-  static createChat() {
+  static async getMessageToken(chatId: number) {
+    return ChatsAPI.getToken(chatId).then(auth => {
+      return auth;
+    });
+  }
+
+  static async createChat() {
     return ChatsAPI.createChat();
   }
 }

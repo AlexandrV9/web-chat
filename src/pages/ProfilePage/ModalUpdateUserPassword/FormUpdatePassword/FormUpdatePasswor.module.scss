@@ -1,0 +1,23 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.title {
+  font-size: 20px;
+  line-height: 28px;
+  text-align: center;
+}
+
+.error {
+  margin-top: auto;
+  text-align: center;
+  color: var(--text-alert-color);
+  width: 100%;
+  display:  inline-block;
+
+  &.visible {
+    display: inline-block;
+  }
+}

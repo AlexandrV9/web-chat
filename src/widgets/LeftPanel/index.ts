@@ -1,10 +1,14 @@
 import { Block } from '@/shared/services/Block';
 import { Navbar } from '../Navbar';
 import { ChatsList } from '@/entities';
-import { Button, Input, Modal } from '@/shared/ui';
+import { Button, Image, Input, Modal } from '@/shared/ui';
 
 import styles from './LeftPanel.module.scss';
 import { FormCreateChat } from './FormCreateChat';
+import { store } from '@/shared/services';
+import { ChatController, messageController } from '@/shared/controllers';
+
+import plusIcon from '@/shared/assets/icons/plus-circle.svg';
 
 interface LeftPanelProps {
   title?: string;
@@ -14,7 +18,12 @@ export class LeftPanel extends Block {
   constructor({ title = '' }: LeftPanelProps) {
     super({
       title,
-      children: new ChatsList(),
+      children: new ChatsList({
+        onSelect: chatId => {
+          messageController.leave();
+          store.setState({ chatId, messages: [] });
+        },
+      }),
       navbar: new Navbar(),
       searchInput: new Input({}),
       modalCreateChat: new Modal({
@@ -24,10 +33,10 @@ export class LeftPanel extends Block {
       }),
       actionButton: new Button({
         className: styles.button,
-        children: 'Добавить чат',
+        children: new Image({ src: plusIcon }),
         onClick: e => {
           e.preventDefault();
-          console.log(this._children.modalCreateChat.setProps({ isOpen: true }));
+          // console.log(this._children.modalCreateChat.setProps({ isOpen: true }));
         },
       }),
     });

@@ -1,6 +1,8 @@
 import { Block } from '@/shared/services';
 
-import cls from './styles.module.scss';
+import cls from './Input.module.scss';
+
+import { clsx } from '@/shared/utils';
 
 export interface InputProps extends Partial<Omit<HTMLInputElement, 'autocomplete'>> {
   className?: string;
@@ -9,6 +11,12 @@ export interface InputProps extends Partial<Omit<HTMLInputElement, 'autocomplete
   value?: string;
   disabled?: boolean;
   autocomplete?: boolean;
+  validation?: {
+    required?: boolean;
+    minlength?: string;
+    maxlength?: string;
+    pattern?: string;
+  };
   onBlur?: (e: FocusEvent) => void;
   onChange?: (e: InputEvent) => void;
 }
@@ -21,21 +29,25 @@ export class Input extends Block {
       type,
       events: {
         blur: onBlur,
-        change: onChange,
+        input: onChange,
       },
     });
   }
 
   render() {
+    const { id, name, type, validation = {}, placeholder, autocomplete } = this.props;
+    const { required, minlength } = validation;
+
     return `
       <input 
-        id={{id}}
-        class='${cls.input} {{className}}'
-        value='{{value}}'
-        name={{name}}
-        placeholder=" "
-        type={{type}}
-        autocomplete={{autocomplete}}
+        class='${clsx(cls.input, this.props.className)}'
+        ${id ? 'id={{id}}' : ''}
+        ${name ? 'name={{name}}' : ''}
+        ${type ? 'type={{type}}' : ''}
+        ${autocomplete ? 'autocomplete={{autocomplete}}' : ''}
+        ${placeholder ? 'placeholder={{placeholder}}' : 'placeholder=" "'}
+        ${required ? 'required' : ''}
+        ${minlength ? 'minlength={{validation.minlength}}' : ''}
       />
     `;
   }

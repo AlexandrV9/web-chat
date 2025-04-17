@@ -3,6 +3,7 @@ import { Block } from '@/shared/services/Block';
 
 import tmpl from './tmpl';
 import { LeftPanel, SendMessageForm } from '@/widgets';
+import { MessageFeed } from '@/widgets/MessageFeed';
 
 export class HomePage extends Block {
   constructor() {
@@ -10,8 +11,7 @@ export class HomePage extends Block {
       LeftPanel: new LeftPanel({
         title: 'Чаты',
       }),
-      SendMessageForm: new SendMessageForm(),
-      Children: new MessagesList(),
+      MessageFeed: new MessageFeed(),
     });
   }
 

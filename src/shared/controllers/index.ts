@@ -1,2 +1,3 @@
-export * from './UserController';
 export * from './ChatController';
+export * from './AuthController';
+export * from './MessageController';

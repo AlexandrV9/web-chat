@@ -8,10 +8,11 @@ export interface ModalProps {
   isOpen: boolean;
   children: Block;
   className?: string;
+  onClose?: () => void;
 }
 
 export class Modal extends Block {
-  constructor({ isOpen, ...props }: ModalProps) {
+  constructor({ isOpen, onClose, ...props }: ModalProps) {
     super({
       isOpen,
       closeButton: new Button({
@@ -20,6 +21,7 @@ export class Modal extends Block {
         onClick: e => {
           e.preventDefault();
           this.setProps({ isOpen: false });
+          onClose?.();
         },
       }),
       ...props,

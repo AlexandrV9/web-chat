@@ -1,59 +1,95 @@
-import { Block } from '@/shared/services';
+import { Block, Store, STORE_EVENTS } from '@/shared/services';
 
-import cls from './styles.module.scss';
+import styles from './SignUpForm.module.scss';
 
-import tmpl from './tmpl';
-import { INPUT_FIELDS } from './constants';
-import { Button, FieldInput } from '@/shared/ui';
-import { firstNameValidator, loginValidator, passwordValidator } from '@/shared/services/Validator';
-import { AuthAPI } from '@/shared/api';
+import { tmpl } from './tmpl';
+import { INPUT_FIELDS, INPUT_NAMES } from './constants';
+import { Button, FieldInput, Link } from '@/shared/ui';
+import { APP_ROUTES } from '@/shared/constants';
+import { AuthController, ReqAuthSignUp } from '@/shared/controllers';
+import { PlainObject } from '@/types';
+
+const store = new Store(
+  Object.keys(INPUT_NAMES).reduce((acc: PlainObject, key) => {
+    acc[key] = false;
+    return acc;
+  }, {}),
+);
 
 export class SignUpForm extends Block {
   constructor() {
     super({
+      errorForm: '',
+      linkToSignInPage: new Link({
+        className: styles.link,
+        to: APP_ROUTES.SIGN_IN,
+        children: 'Войти',
+      }),
+      Inputs: INPUT_FIELDS.map(
+        item =>
+          new FieldInput({
+            ...item,
+            onValid: isValid => {
+              store.setState({ [item.name]: isValid });
+            },
+          }),
+      ),
+      SubmitButton: new Button({
+        disabled: true,
+        variant: 'success',
+        className: styles.btnSubmit,
+        children: 'Зарегистрироваться',
+        type: 'submit',
+      }),
       events: {
-        submit: async (e: Event) => {
-          e.preventDefault();
-          e.stopPropagation();
+        submit: async (event: Event) => {
+          event.preventDefault();
 
-          const formData = new FormData(e.target as HTMLFormElement);
-          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-          // @ts-ignore
-          const values = Object.fromEntries(formData.entries());
+          const { elements } = event.target as HTMLFormElement;
 
-          let isValid = true;
+          const inputs = Array.from(elements).filter(el => {
+            return el.nodeName === 'INPUT';
+          }) as HTMLInputElement[];
 
-          // isValid = !loginValidator(values.email);
-          // isValid = !loginValidator(values.login);
-          // isValid = !loginValidator(values.phone);
-          // isValid = !passwordValidator(values.password);
-          // isValid = !firstNameValidator(values.first_name);
-          // isValid = !firstNameValidator(values.second_name);
-          // isValid = !firstNameValidator(values.password);
+          const formData = inputs.reduce((acc: Record<string, string>, input) => {
+            acc[input.name] = input.value;
+            return acc;
+          }, {}) as unknown as ReqAuthSignUp;
 
-          if (isValid) {
-            console.log(values);
-            const res = await AuthAPI.signUp(values as any);
-            console.log(res);
-          } else {
-            const errorEl = document.querySelector(`.${cls.error}`);
+          const state = store.getState();
+          const isNotValid = Object.values(state).includes(false);
 
-            if (errorEl) {
-              errorEl.classList.add(cls.visible);
-            }
+          this.setProps({
+            errorForm: isNotValid ? 'Некоторые поля формы заполнены не верно' : '',
+          });
+
+          if (isNotValid) {
+            return;
           }
+
+          AuthController.signUp(formData).catch(() => {
+            this.setProps({
+              errorForm: 'Не удалось создать пользователя, попробуйте еще раз',
+            });
+          });
         },
       },
-      Inputs: INPUT_FIELDS.map(item => new FieldInput(item)),
-      SubmitButton: new Button({
-        className: cls.btnSubmit,
-        children: 'Зарегистрироваться',
-        htmlType: 'submit',
-      }),
+    });
+
+    store.on(STORE_EVENTS.updated, () => {
+      const state = store.getState();
+
+      const submitButton: HTMLButtonElement | null = document.querySelector("button[type='submit']");
+
+      if (submitButton) {
+        submitButton.disabled = Object.values(state).includes(false);
+      }
     });
   }
 
   render() {
-    return tmpl;
+    const errorFormText = this.getProp('errorForm');
+
+    return tmpl(errorFormText);
   }
 }

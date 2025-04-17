@@ -1,7 +1,8 @@
 import { baseAPI } from '@/shared/services';
+import { ReqAuthSignIn, ReqAuthSignUp } from '@/types';
 
 export class AuthAPI {
-  static async signIn(data: { login: string; password: string }) {
+  static async signIn(data: ReqAuthSignIn) {
     const response = await baseAPI.post<'OK'>('/auth/signin', data, {
       credentials: 'include',
       headers: {
@@ -10,14 +11,18 @@ export class AuthAPI {
     });
 
     if (response.status === 401) {
-      console.log("Редирект на страницу авторизации")
+      console.log('Редирект на страницу авторизации');
       // Отчистка токенов
+    }
+
+    if (!response.ok) {
+      return Promise.reject(response);
     }
 
     return response;
   }
 
-  static signUp(data: { firstName: string; secondName: string; login: string; email: string; password: string; phone: string }) {
+  static signUp(data: ReqAuthSignUp) {
     return baseAPI.post('/auth/signup', data, {
       headers: {
         'Content-Type': 'application/json',

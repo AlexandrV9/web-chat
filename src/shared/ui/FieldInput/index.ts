@@ -1,7 +1,8 @@
 import { Block } from '@/shared/services';
 import { Input, InputProps } from '../Input';
 
-import tmpl from './tmpl';
+import styles from './FieldInput.module.scss';
+import { clsx } from '@/shared/utils';
 
 interface FieldInputProps extends InputProps {
   label?: string;
@@ -9,24 +10,33 @@ interface FieldInputProps extends InputProps {
   className?: string;
   autocomplete?: boolean;
   validator?: (value: string) => string;
+  onValid?: (value: boolean) => void;
 }
 
 export type IFieldInput = FieldInputProps;
 
 export class FieldInput extends Block {
-  constructor({ label, textError = '', className = '', validator, ...props }: FieldInputProps) {
+  constructor({ label, textError = '', className = '', onValid, validator, id, ...props }: FieldInputProps) {
     super({
       label,
-      textError: '',
-      htmlFor: props.id,
+      textError,
+      htmlFor: id,
       className,
       input: new Input({
-        onBlur: e => {
+        id,
+        className: clsx(styles.input),
+        onBlur: (event: FocusEvent) => {
+          const { target } = event as unknown as { target: { value: string } };
+
           if (!validator) return;
 
-          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-          // @ts-ignore
-          this.setProps({ textError: validator(e.target?.value) });
+          const error = validator(target.value);
+
+          this.setProps({ textError: error });
+
+          onValid?.(!error);
+
+          props?.onBlur?.(event);
         },
         ...props,
       }),
@@ -34,6 +44,16 @@ export class FieldInput extends Block {
   }
 
   render() {
-    return tmpl;
+    const { className } = this.props;
+
+    return `
+      <div class='${clsx(styles.fieldInput, className)}'>
+        <label for={{htmlFor}} class=${styles.label}>
+          {{label}}
+        </label>
+        {{{input}}}
+        <span class=${styles.error}>{{textError}}</span>
+      </div>
+    `;
   }
 }

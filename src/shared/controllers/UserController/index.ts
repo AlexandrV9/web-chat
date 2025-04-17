@@ -1,10 +1,7 @@
-import { AuthAPI } from '@/shared/api';
-import { store } from '@/shared/services';
+import { ReqUpdatePassword, UserAPI } from '@/shared/api';
 
 export class UserController {
-  static getAuthUser() {
-    AuthAPI.getAuthUser().then(res => {
-      store.set('user', res.data);
-    });
+  static async updatePassword(data: ReqUpdatePassword) {
+    return UserAPI.updatePassword(data);
   }
 }

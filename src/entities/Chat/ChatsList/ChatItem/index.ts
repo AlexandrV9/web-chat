@@ -7,11 +7,13 @@ import { navigate } from '@/shared/utils';
 
 export interface ChatItemProps {
   data: Chat;
+  onClick?: (chatId: number) => void;
 }
 
 export class ChatItem extends Block {
-  constructor({ data }: ChatItemProps) {
+  constructor({ data, onClick }: ChatItemProps) {
     super({
+      id: data.id,
       title: data.title,
       unreadCount: data.unread_count,
       lastMessage: data.lastMessage?.content ?? '',
@@ -19,7 +21,7 @@ export class ChatItem extends Block {
       events: {
         click: (event: MouseEvent) => {
           event.preventDefault();
-          navigate(`/messenger/${data.id}`);
+          onClick?.(this.props.id);
         },
       },
     });

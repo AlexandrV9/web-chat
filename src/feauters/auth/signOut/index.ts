@@ -8,6 +8,7 @@ import { AuthAPI } from '@/shared/api';
 
 export const SignOutButton = new Button({
   children: 'Выйти',
+  variant: 'alert',
   className: styles.button,
   onClick: async e => {
     e.preventDefault();

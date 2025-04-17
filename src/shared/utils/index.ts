@@ -11,3 +11,4 @@ export * from './generateUUID';
 export * from './trim';
 export * from './convertObjKeysToCamelCase';
 export * from './clsx';
+export * from './convertObjKeysToSnakeCase';

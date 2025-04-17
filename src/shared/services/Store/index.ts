@@ -1,21 +1,30 @@
-import { setValueInObjectByPath } from '@/shared/utils';
 import { EventBus } from '../EventBus';
+import { PlainObject } from '@/types';
 
-type Indexed = Record<string, unknown>;
+type State = PlainObject;
 
 export const STORE_EVENTS = {
   updated: 'updated',
 } as const;
 
-class Store extends EventBus {
-  private state: Indexed = {};
+export class Store extends EventBus {
+  private state: State = {};
+
+  constructor(initialState?: State) {
+    super();
+    this.state = initialState ?? {};
+  }
 
   public getState() {
     return this.state;
   }
 
-  public set(path: string, value: unknown) {
-    setValueInObjectByPath(this.state, path, value);
+  public setState(updater: ((prevState: State) => State) | State) {
+    if (!updater) return;
+
+    const nextState = typeof updater === 'function' ? updater(this.state) : updater;
+
+    Object.assign(this.state, nextState);
 
     this.emit(STORE_EVENTS.updated);
   }

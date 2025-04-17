@@ -9,6 +9,12 @@ export class ChatsAPI {
     return baseAPI.post('/chats', data, { credentials: 'include' });
   }
 
+  static getToken(chatId: number) {
+    return baseAPI.post<{
+      token: string;
+    }>(`/chats/token/${chatId}`, {}, { credentials: 'include' });
+  }
+
   // static async signIn(data: { login: string; password: string }) {
   //   const response = await baseAPI.post<'OK'>('/auth/signin', data, {
   //     credentials: 'include',

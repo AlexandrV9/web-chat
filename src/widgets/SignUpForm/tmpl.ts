@@ -1,20 +1,18 @@
-import { APP_ROUTES } from '@/shared/constants';
-import styles from './styles.module.scss';
+import { clsx } from '@/shared/utils';
+import styles from './SignUpForm.module.scss';
 
-const tmpl = `
+export const tmpl = (error: string) => `
   <form class=${styles.signUpForm}>
     <h3 class=${styles.title}>Регистрация</h3>
 
     {{{Inputs}}}
 
-    <span class=${styles.error}>Некоторые поля формы заполнены не верно</span>
+    <span class='${clsx(styles.error, { [styles.visible]: error })}'>{{errorForm}}</span>
 
     {{{SubmitButton}}}
 
     <p class=${styles.linkWrapper}>
-      <a data-page="signIn" href=${APP_ROUTES.SIGN_IN}>Войти</a>
+      {{{linkToSignInPage}}}
     </p>
   </form>
 `;
-
-export default tmpl;

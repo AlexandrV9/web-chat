@@ -1,6 +1,7 @@
 import { SignInForm } from '@/widgets';
 import { Block } from '@/shared/services';
-import { tmpl } from './tmpl';
+
+import styles from './SignInPage.module.scss';
 
 export class SignInPage extends Block {
   constructor() {
@@ -10,6 +11,10 @@ export class SignInPage extends Block {
   }
 
   render() {
-    return tmpl;
+    return `
+      <main class=${styles.signInPage}>
+        {{{content}}}
+      </main>
+    `;
   }
 }

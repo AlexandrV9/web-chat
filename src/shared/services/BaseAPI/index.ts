@@ -28,8 +28,8 @@ export class BaseAPI {
     return this.api.patch<TResData, TReqData, TError>(this._prepareUrl(url), data).then(this._transformResponse);
   }
 
-  async put<TResData = unknown, TReqData = unknown, TError = unknown>(url: string, data: TReqData) {
-    return this.api.put<TResData, TReqData, TError>(this._prepareUrl(url), data).then(this._transformResponse);
+  async put<TResData = unknown, TReqData = unknown, TError = unknown>(url: string, data: TReqData, options?: ApiRequestOptions) {
+    return this.api.put<TResData, TReqData, TError>(this._prepareUrl(url), data, options).then(this._transformResponse);
   }
 
   async delete<TResData = unknown, TError = unknown>(url: string) {

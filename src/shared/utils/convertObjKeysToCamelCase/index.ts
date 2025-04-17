@@ -1,20 +1,16 @@
 import { PlainObject } from '@/types';
 
-const convertKeyObjToCamelCase = (key: string) => {
-  const arr = key.split('_');
-  let result = arr[0];
+export function convertObjKeysToCamelCase<T>(obj: PlainObject, replace?: string): T {
+  return Object.entries(obj).reduce((acc: PlainObject, [key, value]) => {
+    const chars = [...key];
+    chars.forEach((char, index) => {
+      if (char === (replace || '_')) {
+        chars[index] = '';
+        chars[index + 1] = chars[index + 1].toUpperCase();
+      }
+    });
 
-  for (let i = 1; i < arr.length; i++) {
-    result += arr[i][0].toUpperCase() + arr[i].slice(1);
-  }
-
-  return result;
-};
-
-export const convertObjKeysToCamelCase = (obj: PlainObject) => {
-  return Object.keys(obj).reduce((acc, key) => {
-    const newKey = convertKeyObjToCamelCase(key);
-    acc[newKey] = obj[key];
+    acc[chars.join('')] = value;
     return acc;
-  }, {} as PlainObject);
-};
+  }, {}) as T;
+}
