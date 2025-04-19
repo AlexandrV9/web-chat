@@ -2,6 +2,7 @@ import { Block } from '@/shared/services';
 
 interface ImageProps {
   src: string;
+  className?: string;
 }
 
 export class Image extends Block {
@@ -10,9 +11,15 @@ export class Image extends Block {
   }
 
   render() {
+    const { className } = this.getProps();
+
+    console.log(className);
+
     return `
-      <img 
-        src={{src}} 
+      <img
+        ${className ? `class='${className}'` : ''}
+        
+        src={{ src }} 
       />
     `;
   }

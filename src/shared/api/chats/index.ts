@@ -1,12 +1,23 @@
 import { baseAPI } from '@/shared/services';
+import { convertObjKeysToSnakeCase } from '@/shared/utils';
+
+export interface ReqCreateChat {
+  title: string;
+}
+
+export interface ReqGetAllChats {
+  offset: number;
+  limit: number;
+  title: string;
+}
 
 export class ChatsAPI {
-  static getAll(data?: { offset: number; limit: number; title: string }) {
+  static getAll(data?: ReqGetAllChats) {
     return baseAPI.get('/chats', { credentials: 'include', params: data });
   }
 
-  static createChat(data?: { title: string }) {
-    return baseAPI.post('/chats', data, { credentials: 'include' });
+  static createChat(data: ReqCreateChat) {
+    return baseAPI.post('/chats', JSON.stringify(convertObjKeysToSnakeCase(data)), { credentials: 'include' });
   }
 
   static getToken(chatId: number) {

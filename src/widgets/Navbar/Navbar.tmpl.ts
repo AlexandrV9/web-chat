@@ -1,4 +1,4 @@
-import cls from './styles.module.scss';
+import cls from './Navbar.module.scss';
 
 export const tmpl = `
   <nav class=${cls.navbar}>

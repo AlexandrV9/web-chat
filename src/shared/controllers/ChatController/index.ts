@@ -1,4 +1,4 @@
-import { ChatsAPI } from '@/shared/api';
+import { ChatsAPI, ReqCreateChat } from '@/shared/api';
 import { store } from '@/shared/services';
 
 export class ChatController {
@@ -16,7 +16,7 @@ export class ChatController {
     });
   }
 
-  static async createChat() {
-    return ChatsAPI.createChat();
+  static async createChat(data: ReqCreateChat) {
+    return ChatsAPI.createChat(data);
   }
 }

@@ -1,0 +1,38 @@
+.text {
+  font-style: normal;
+}
+
+.accent1 {
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 32px;
+}
+
+.text1 {
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 20px;
+}
+
+.text2 {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+}
+
+.text3 {
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 28px;
+}
+
+.textInline {
+  display: inline-block;
+}
+
+.textOverflow {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

@@ -1,6 +1,6 @@
 import { PlainObject } from "@/types";
 
-export function convertKeysToSnakeCase<T>(obj: PlainObject): T {
+export function convertObjKeysToSnakeCase<T>(obj: PlainObject): T {
   return Object.entries(obj).reduce((acc: PlainObject, [key, value]) => {
     const chars = [...key];
     chars.forEach((char, index) => {

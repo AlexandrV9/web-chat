@@ -2,7 +2,7 @@ import { Block, Store, STORE_EVENTS } from '@/shared/services';
 
 import styles from './SignUpForm.module.scss';
 
-import { tmpl } from './tmpl';
+import { tmpl } from './SignUpForm.tmpl';
 import { INPUT_FIELDS, INPUT_NAMES } from './constants';
 import { Button, FieldInput, Link } from '@/shared/ui';
 import { APP_ROUTES } from '@/shared/constants';
@@ -79,16 +79,16 @@ export class SignUpForm extends Block {
     store.on(STORE_EVENTS.updated, () => {
       const state = store.getState();
 
-      const submitButton: HTMLButtonElement | null = document.querySelector("button[type='submit']");
+      const submitButton = this.getPropValue('SubmitButton');
 
-      if (submitButton) {
-        submitButton.disabled = Object.values(state).includes(false);
-      }
+      submitButton.setProps({
+        disabled: Object.values(state).includes(false),
+      });
     });
   }
 
   render() {
-    const errorFormText = this.getProp('errorForm');
+    const errorFormText = this.getPropValue('errorForm');
 
     return tmpl(errorFormText);
   }

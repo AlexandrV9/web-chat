@@ -162,7 +162,7 @@ export abstract class Block<TProps extends BlockProps = BlockProps> {
     return this.props as Required<TProps>;
   }
 
-  public getProp(name: string) {
+  public getPropValue(name: string) {
     return this.props[name];
   }
 
@@ -197,13 +197,21 @@ export abstract class Block<TProps extends BlockProps = BlockProps> {
     return oldProps !== newProps;
   }
 
+  public remove() {
+    if (this._element) {
+      this._element?.remove();
+    }
+  }
+
   public show() {
-    console.log('show');
+    if (this._element) {
+      this._element.classList.remove('hide');
+    }
   }
 
   public hide() {
     if (this._element) {
-      this._element.remove();
+      this._element.classList.add('hide');
     }
   }
 }

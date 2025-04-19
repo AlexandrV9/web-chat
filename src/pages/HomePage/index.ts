@@ -1,8 +1,7 @@
-import { MessagesList } from '@/entities';
 import { Block } from '@/shared/services/Block';
 
-import tmpl from './tmpl';
-import { LeftPanel, SendMessageForm } from '@/widgets';
+import tmpl from './HomePage.tmpl';
+import { LeftPanel } from '@/widgets';
 import { MessageFeed } from '@/widgets/MessageFeed';
 
 export class HomePage extends Block {

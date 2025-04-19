@@ -45,7 +45,7 @@ export class Input extends Block {
         ${name ? 'name={{name}}' : ''}
         ${type ? 'type={{type}}' : ''}
         ${autocomplete ? 'autocomplete={{autocomplete}}' : ''}
-        ${placeholder ? 'placeholder={{placeholder}}' : 'placeholder=" "'}
+        ${placeholder ? 'placeholder="{{placeholder}}"' : ''}
         ${required ? 'required' : ''}
         ${minlength ? 'minlength={{validation.minlength}}' : ''}
       />

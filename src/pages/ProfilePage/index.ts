@@ -1,69 +1,94 @@
 import { Block } from '@/shared/services/Block';
-import { Button, FieldInput } from '@/shared/ui';
-import { LeftPanel } from '@/widgets';
-import { tmpl } from './tmpl';
-import { INPUT_FIELDS } from './constants';
-import { SignOutButton } from '@/feauters/auth/signOut';
-import { BlockProps, store, STORE_EVENTS } from '@/shared/services';
+import { Button, Icon, Image, Input } from '@/shared/ui';
+import { LeftPanel, ModalUpdateAvatar, ModalUpdatePassword, ModalUpdateProfile } from '@/widgets';
+import { tmpl } from './ProfilePage.tmpl';
+import { ITEMS } from './constants';
+import { store, STORE_EVENTS } from '@/shared/services';
 
-import cls from './ProfilePage.module.scss';
-import { getUserName } from '@/shared/utils';
 import { PlainObject, User } from '@/types';
-import { modalStore, ModalUpdateUserPassword } from './ModalUpdateUserPassword';
+import { ProfileListItem } from './ProfileListItem';
+import { AuthController } from '@/shared/controllers';
+
+import { getImageSrc, getUserName } from '@/shared/utils';
+
+import styles from './ProfilePage.module.scss';
+
+import iconUser from '@/shared/assets/icons/user-circle.svg';
 
 export class ProfilePage extends Block {
   constructor() {
     super({
-      classNameForm: 'form-profile',
+      profileName: '',
       LeftPanel: new LeftPanel({
         title: 'Профиль',
       }),
-      Inputs: INPUT_FIELDS.map(item => {
-        return new FieldInput({ ...item, className: cls.itemList, value: 'd' });
+      Avatar: new Icon({ src: iconUser, size: 40 }),
+      Items: [],
+      UpdateAvatarButton: new Button({
+        variant: 'clean',
+        className: styles.updateAvatarButton,
+        onClick: event => {
+          event.preventDefault();
+          this.getPropValue('ModalUpdateAvatar').setProps({ isOpen: true });
+        },
+        children: `
+          <p class=${styles.textHint}>
+            <span>Поменять</span>
+            <span>аватар</span>                
+          </p>
+        `,
+      }),
+      UpdateProfileButton: new Button({
+        children: 'Обновить профиль',
+        onClick: e => {
+          e.preventDefault();
+          this.getPropValue('ModalUpdateProfile').setProps({ isOpen: true });
+        },
       }),
       UpdatePasswordButton: new Button({
         children: 'Обновить пароль',
         onClick: e => {
           e.preventDefault();
-
-          modalStore.setState({ isOpen: true });
+          this.getPropValue('ModalUpdatePassword').setProps({ isOpen: true });
         },
       }),
-      SignOutButton,
-      ModalUpdatePassword: new ModalUpdateUserPassword(),
+      SignOutButton: new Button({
+        children: 'Выйти',
+        variant: 'alert',
+        onClick: e => {
+          e.preventDefault();
+
+          AuthController.signOut();
+        },
+      }),
+      ModalUpdateAvatar: new ModalUpdateAvatar(),
+      ModalUpdateProfile: new ModalUpdateProfile(),
+      ModalUpdatePassword: new ModalUpdatePassword(),
     });
   }
 
   componentDidMount() {
     store.on(STORE_EVENTS.updated, () => {
-      const state = store.getState() as { user: User };
+      const state = store.getState() as { user: PlainObject };
 
       if (!state.user) return;
 
-      this.setFormInputes(state.user);
-      this.setProps({ profileName: getUserName(state.user) });
-    });
-  }
-
-  setFormInputes(formData: PlainObject) {
-    const formElement = this.getContent()?.querySelector(`.${this.props.classNameForm}`);
-
-    if (!formElement) {
-      return;
-    }
-
-    const { elements } = formElement as HTMLFormElement;
-
-    const inputs = Array.from(elements).filter(item => {
-      return item.nodeName === 'INPUT';
-    }) as HTMLInputElement[];
-
-    inputs.forEach(input => {
-      input.value = formData[input.name];
+      this.setProps({
+        Avatar: state.user.avatar
+          ? new Image({ src: getImageSrc(state.user.avatar), className: styles.avatar })
+          : new Icon({ src: iconUser, size: 40 }),
+        profileName: getUserName(state.user as User),
+        Items: ITEMS.map(item => {
+          const value = state.user[item.name];
+          return new ProfileListItem({ title: item.label, value: item.format(value) });
+        }),
+      });
     });
   }
 
   render() {
-    return tmpl(this.props as any);
+    const classNameForm = this.getPropValue('classNameForm');
+
+    return tmpl(classNameForm);
   }
 }

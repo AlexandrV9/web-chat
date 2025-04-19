@@ -1,6 +1,6 @@
 import styles from './SignInForm.module.scss';
 
-import { tmpl } from './tmpl';
+import { tmpl } from './SignInForm.tmpl';
 import { INPUT_FIELDS, INPUT_NAMES } from './constants';
 import { Button, FieldInput, Link } from '@/shared/ui';
 import { Block } from '@/shared/services/Block';
@@ -52,7 +52,6 @@ export class SignInForm extends Block {
           }) as HTMLInputElement[];
 
           const formData = inputs.reduce((acc: Record<string, string>, input) => {
-            console.log(input.name, input.value);
             acc[input.name] = input.value;
             return acc;
           }, {}) as unknown as ReqAuthSignIn;
@@ -80,17 +79,16 @@ export class SignInForm extends Block {
     store.on(STORE_EVENTS.updated, () => {
       const state = store.getState();
 
+      const submitButton = this.getPropValue('SubmitButton');
 
-      const submitButton: HTMLButtonElement | null = document.querySelector("button[type='submit']");
-
-      if (submitButton) {
-        submitButton.disabled = Object.values(state).includes(false);
-      }
+      submitButton.setProps({
+        disabled: Object.values(state).includes(false),
+      });
     });
   }
 
   render() {
-    const errorFormText = this.getProp('errorForm');
+    const errorFormText = this.getPropValue('errorForm');
     return tmpl(errorFormText);
   }
 }

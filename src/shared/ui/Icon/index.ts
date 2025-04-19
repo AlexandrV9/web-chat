@@ -1,25 +1,30 @@
 import { Block } from '@/shared/services';
+import { clsx } from '@/shared/utils';
 
 interface IconProps {
+  className?: string;
   size?: number;
-  text?: string;
+  src: string;
 }
 
-export class Icon extends Block {
+export class Icon extends Block<IconProps> {
   constructor(props: IconProps) {
-    super(props);
+    super({
+      size: 24,
+      ...props,
+    });
   }
 
   render() {
+    const { className, size } = this.getProps();
+
     return `
-      <svg 
-        fill="none" 
-        class="icon" 
-        width={{ size }} 
-        height={{ size }}
-      >
-        <use href="{{ path }}"></use>
-      </svg>
+      <img 
+        className='${clsx(className)}'
+        width='${size}px'
+        height='${size}px'
+        src={{src}} 
+      />
     `;
   }
 }

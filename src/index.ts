@@ -28,9 +28,9 @@ export class App {
       .use(APP_ROUTES.SIGN_IN, SignInPage)
       .use(APP_ROUTES.SIGN_UP, SignUpPage)
       .use(APP_ROUTES.CONVERSATIONS, HomePage)
-      // .use(APP_ROUTES.SETTINGS, ProfilePage)
-      // .use(APP_ROUTES.SERVER_ERROR, ServerErrorPage)
-      // .use(APP_ROUTES.NOT_FOUND, NotFoundPage);
+      .use(APP_ROUTES.SETTINGS, ProfilePage)
+      .use(APP_ROUTES.SERVER_ERROR, ServerErrorPage)
+      .use(APP_ROUTES.NOT_FOUND, NotFoundPage);
 
     checkIsAuth();
 

@@ -5,3 +5,5 @@ export * from './FieldInput';
 export * from './Link';
 export * from './Image';
 export * from './Modal';
+export * from './Icon';
+export * from './Typography';

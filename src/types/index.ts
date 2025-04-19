@@ -10,6 +10,7 @@ export interface User {
   login: string;
   email: string;
   phone: string;
+  avatar: string | null;
 }
 
 export interface Chat {

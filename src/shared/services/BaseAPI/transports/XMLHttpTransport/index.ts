@@ -52,7 +52,7 @@ export class XMLHttpTransport implements ApiTransport {
   }
 
   async _request(url: string, data: unknown, options: XMLHttpOptions): Promise<XMLHttpRequest> {
-    const { method = METHODS.GET, credentials, params = {} } = options;
+    const { method = METHODS.GET, credentials, params = {}, headers } = options;
 
     return new Promise((resolve, reject) => {
       const xhr = new XMLHttpRequest();
@@ -66,11 +66,18 @@ export class XMLHttpTransport implements ApiTransport {
       xhr.onerror = reject;
       xhr.ontimeout = reject;
 
+      const defaultHeaders = {
+        'Content-type': 'application/json; charset=utf-8',
+      };
+
+      Object.entries(headers ? headers : defaultHeaders).forEach(([key, value]) => {
+        xhr.setRequestHeader(key, value);
+      });
+
       if (method === METHODS.GET || !data) {
         xhr.send();
       } else {
-        xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
-        xhr.send(JSON.stringify(data) as XMLHttpRequestBodyInit);
+        xhr.send(data as never);
       }
     });
   }

@@ -30,7 +30,7 @@ export class AuthController {
   }
 
   static async signOut() {
-    return AuthAPI.signOut().then(() => {
+    return AuthAPI.signOut().then((res) => {
       router.goByPathname(APP_ROUTES.SIGN_IN);
     });
   }

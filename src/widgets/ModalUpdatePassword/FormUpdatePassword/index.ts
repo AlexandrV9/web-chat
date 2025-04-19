@@ -1,20 +1,19 @@
 import { Block, Store, STORE_EVENTS } from '@/shared/services';
-import { Button, FieldInput } from '@/shared/ui';
-import { tmpl } from './tmpl';
+import { Button, FieldInput, Typography } from '@/shared/ui';
+import { tmpl } from './FormUpdatePassword.tmpl';
 
-import styles from './FormUpdatePasswor.module.scss';
 import { UserController } from '@/shared/controllers/UserController';
 import { INPUT_FIELDS, INPUT_NAMES } from './constants';
 import { PlainObject } from '@/types';
 import { ReqUpdatePassword } from '@/shared/api';
-import { modalStore } from '..';
+import { modalUpdatePasswordStore } from '@/widgets/ModalUpdatePassword';
 
 const initialState = Object.keys(INPUT_NAMES).reduce((acc: PlainObject, key) => {
   acc[key] = false;
   return acc;
 }, {});
 
-const store = new Store(initialState);
+const formStore = new Store(initialState);
 
 interface FormUpdatePasswordProps {
   onCloseModal?: () => void;
@@ -24,17 +23,21 @@ export class FormUpdatePassword extends Block {
   constructor({ onCloseModal }: FormUpdatePasswordProps) {
     super({
       errorForm: '',
+      Title: new Typography({
+        variant: 'text2',
+        text: 'Обновление пароля',
+        align: 'center',
+      }),
       Inputs: INPUT_FIELDS.map(
         item =>
           new FieldInput({
             ...item,
             onValid: isValid => {
-              store.setState({ [item.name]: isValid });
+              formStore.setState({ [item.name]: isValid });
             },
           }),
       ),
       ButtonCancel: new Button({
-        className: styles.cancelButton,
         children: 'Отмена',
         onClick: () => {
           onCloseModal?.();
@@ -44,7 +47,6 @@ export class FormUpdatePassword extends Block {
       ButtonSubmit: new Button({
         disabled: true,
         type: 'submit',
-        className: styles.submitButton,
         variant: 'success',
         children: 'Сохранить',
       }),
@@ -62,7 +64,7 @@ export class FormUpdatePassword extends Block {
             return acc;
           }, {}) as unknown as ReqUpdatePassword;
 
-          const state = store.getState();
+          const state = formStore.getState();
           const isNotValid = Object.values(state).includes(false);
 
           this.setProps({
@@ -91,55 +93,32 @@ export class FormUpdatePassword extends Block {
       },
     });
 
-    modalStore.on(STORE_EVENTS.updated, () => {
-      const state = modalStore.getState();
+    modalUpdatePasswordStore.on(STORE_EVENTS.updated, () => {
+      const state = modalUpdatePasswordStore.getState();
 
       if (!state.isOpen) {
         this.clearForm();
       }
     });
 
-    store.on(STORE_EVENTS.updated, () => {
-      const state = store.getState();
-      const form = this.getContent() as HTMLFormElement | null;
-
-      if (!form) {
-        return;
-      }
-
-      const submitButton: HTMLButtonElement | null = form.querySelector("button[type='submit']");
-
-      if (submitButton) {
-        submitButton.disabled = Object.values(state).includes(false);
-      }
+    formStore.on(STORE_EVENTS.updated, () => {
+      const state = formStore.getState();
+      const submitButton = this.getPropValue('ButtonSubmit') as Block;
+      submitButton.setProps({ disabled: Object.values(state).includes(false) });
     });
   }
 
   clearForm() {
-    const form = this.getContent() as HTMLFormElement | null;
-
-    if (!form) {
-      return;
-    }
-
-    const fields = this._lists.Inputs.children as Block[];
-    fields.forEach(input => {
-      console.log(input.setProps({ textError: '' }));
+    this.getPropValue('Inputs').forEach((input: Block) => {
+      input.setProps({ textError: '' });
+      input.props.input._element.value = '';
     });
 
-    const inputs = Array.from(form.elements).filter(el => {
-      return el.nodeName === 'INPUT';
-    }) as HTMLInputElement[];
-
-    inputs.forEach(input => {
-      input.value = '';
-    });
-
-    store.setState(initialState);
+    formStore.setState(initialState);
   }
 
   render() {
-    const errorFormText = this.getProp('errorForm');
+    const errorFormText = this.getPropValue('errorForm');
     return tmpl(errorFormText);
   }
 }

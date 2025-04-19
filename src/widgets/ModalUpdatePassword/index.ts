@@ -1,17 +1,17 @@
 import { Modal } from '@/shared/ui';
-import { FormUpdatePassword } from './FormUpdatePassword';
 import { Store, STORE_EVENTS } from '@/shared/services';
+import { FormUpdatePassword } from './FormUpdatePassword';
 
-export const modalStore = new Store({
+export const modalUpdatePasswordStore = new Store({
   isOpen: false,
 });
 
-export class ModalUpdateUserPassword extends Modal {
+export class ModalUpdatePassword extends Modal {
   constructor() {
     super({
       isOpen: false,
       onClose: () => {
-        modalStore.setState({ isOpen: false });
+        modalUpdatePasswordStore.setState({ isOpen: false });
       },
       children: new FormUpdatePassword({
         onCloseModal: () => {
@@ -22,8 +22,8 @@ export class ModalUpdateUserPassword extends Modal {
       }),
     });
 
-    modalStore.on(STORE_EVENTS.updated, () => {
-      const state = modalStore.getState();
+    modalUpdatePasswordStore.on(STORE_EVENTS.updated, () => {
+      const state = modalUpdatePasswordStore.getState();
 
       this.setProps({ isOpen: state.isOpen });
     });

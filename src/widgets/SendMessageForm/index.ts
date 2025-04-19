@@ -1,33 +1,49 @@
 import { Block } from '@/shared/services';
-import { tmpl } from './tmpl';
-import { Input } from '@/shared/ui';
+import { tmpl } from './SendMessageForm.tmpl';
+import { Button, Icon, Input } from '@/shared/ui';
 
-import cls from './styles.module.scss';
+import styles from './SendMessageForm.module.scss';
+
+import paperClipIcon from '@/shared/assets/icons/paper-clip.svg';
+import arrowRightIcon from '@/shared/assets/icons/arrow-right.svg';
 
 export class SendMessageForm extends Block {
   constructor() {
     super({
-      events: {
-        submit: (e: Event) => {
-          e.preventDefault();
-          e.stopPropagation();
-
-          const formData = new FormData(e.target as HTMLFormElement);
-          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-          // @ts-ignore
-          const values = Object.fromEntries(formData.entries());
-
-          if (values.message) {
-            console.log(values);
-          }
-        },
-      },
+      ButtonAttach: new Button({
+        variant: 'clean',
+        className: styles.btnAttach,
+        children: new Icon({ src: paperClipIcon }),
+      }),
       InputMessage: new Input({
         id: 'send-message',
-        className: cls.inpTextMessage,
+        className: styles.inpTextMessage,
         placeholder: 'Введите сообщение...',
         name: 'message',
       }),
+      ButtonSubmit: new Button({
+        variant: 'clean',
+        className: styles.btnSendMessage,
+        children: new Icon({ src: arrowRightIcon, size: 20 }),
+      }),
+      events: {
+        submit: (event: Event) => {
+          event.preventDefault();
+
+          const { elements } = event.target as HTMLFormElement;
+
+          const inputs = Array.from(elements).filter(el => {
+            return el.nodeName === 'INPUT';
+          }) as HTMLInputElement[];
+
+          const formData = inputs.reduce((acc: Record<string, string>, input) => {
+            acc[input.name] = input.value;
+            return acc;
+          }, {}) as unknown;
+
+          console.log(formData);
+        },
+      },
     });
   }
 

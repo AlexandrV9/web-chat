@@ -1,7 +1,9 @@
 import { isPlainObject } from '@/shared/utils/_common';
 import { xmlHttpRequest } from './transports';
 import { ApiRequestOptions, ApiResponse, ApiTransport } from './types';
-import { convertObjKeysToCamelCase } from '@/shared/utils';
+import { convertObjKeysToCamelCase, convertObjKeysToSnakeCase } from '@/shared/utils';
+import { PlainObject } from '@/types';
+import { HOST_API } from '@/shared/constants';
 
 type ApiOptions = {
   baseURL?: string;
@@ -17,7 +19,7 @@ export class BaseAPI {
   }
 
   async post<TResData = unknown, TReqData = unknown, TError = unknown>(url: string, data: TReqData, options?: ApiRequestOptions) {
-    return this.api.post<TResData, TReqData, TError>(this._prepareUrl(url), data, options).then(this._transformResponse);
+    return this.api.post<TResData, TReqData, TError>(this._prepareUrl(url), this._transformDataRequest(data), options).then(this._transformResponse);
   }
 
   async get<TResData = unknown, TError = unknown>(url: string, options?: ApiRequestOptions) {
@@ -25,18 +27,22 @@ export class BaseAPI {
   }
 
   async patch<TResData = unknown, TReqData = unknown, TError = unknown>(url: string, data: TReqData) {
-    return this.api.patch<TResData, TReqData, TError>(this._prepareUrl(url), data).then(this._transformResponse);
+    return this.api.patch<TResData, TReqData, TError>(this._prepareUrl(url), this._transformDataRequest(data)).then(this._transformResponse);
   }
 
   async put<TResData = unknown, TReqData = unknown, TError = unknown>(url: string, data: TReqData, options?: ApiRequestOptions) {
-    return this.api.put<TResData, TReqData, TError>(this._prepareUrl(url), data, options).then(this._transformResponse);
+    return this.api.put<TResData, TReqData, TError>(this._prepareUrl(url), this._transformDataRequest(data), options).then(this._transformResponse);
   }
 
   async delete<TResData = unknown, TError = unknown>(url: string) {
     return this.api.delete<TResData, TError>(this._prepareUrl(url)).then(this._transformResponse);
   }
 
-  _transformResponse<TResData, TError>(response: ApiResponse<TResData, TError>): ApiResponse<TResData, TError> {
+  private _transformDataRequest<TResData>(data: TResData): TResData {
+    return data;
+  }
+
+  private _transformResponse<TResData, TError>(response: ApiResponse<TResData, TError>): ApiResponse<TResData, TError> {
     try {
       const { data } = response;
 
@@ -59,7 +65,7 @@ export class BaseAPI {
     }
   }
 
-  _prepareUrl(url: string): string {
+  private _prepareUrl(url: string): string {
     if (this.options?.baseURL) {
       return this.options?.baseURL + url;
     }
@@ -68,4 +74,4 @@ export class BaseAPI {
   }
 }
 
-export const baseAPI = new BaseAPI(xmlHttpRequest, { baseURL: 'https://ya-praktikum.tech/api/v2' });
+export const baseAPI = new BaseAPI(xmlHttpRequest, { baseURL: HOST_API });
