@@ -7,3 +7,4 @@ export * from './Image';
 export * from './Modal';
 export * from './Icon';
 export * from './Typography';
+export * from './Dropdown';

@@ -34,8 +34,10 @@ export class BaseAPI {
     return this.api.put<TResData, TReqData, TError>(this._prepareUrl(url), this._transformDataRequest(data), options).then(this._transformResponse);
   }
 
-  async delete<TResData = unknown, TError = unknown>(url: string) {
-    return this.api.delete<TResData, TError>(this._prepareUrl(url)).then(this._transformResponse);
+  async delete<TResData = unknown, TReqData = unknown, TError = unknown>(url: string, data: TReqData, options?: ApiRequestOptions) {
+    return this.api
+      .delete<TResData, TReqData, TError>(this._prepareUrl(url), this._transformDataRequest(data), options)
+      .then(this._transformResponse);
   }
 
   private _transformDataRequest<TResData>(data: TResData): TResData {

@@ -13,12 +13,9 @@ export class Image extends Block {
   render() {
     const { className } = this.getProps();
 
-    console.log(className);
-
     return `
       <img
         ${className ? `class='${className}'` : ''}
-        
         src={{ src }} 
       />
     `;

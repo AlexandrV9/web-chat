@@ -1,25 +1,34 @@
-import { Block } from '@/shared/services';
+import { Block, store, STORE_EVENTS } from '@/shared/services';
 
 import { MessagesList } from '@/entities';
-import { SendMessageForm } from '../SendMessageForm';
-import { Button, Image } from '@/shared/ui';
+import { SendMessageForm } from './SendMessageForm';
 
-import styles from './MessageFeed.module.scss';
-import menuIcon from '@/shared/assets/icons/ellipsis-v.svg';
 import { tmpl } from './MessageFeed.tmpl';
+import { ChatNotSelected } from './ChatNotSelected';
+import { ChatHeader } from './ChatHeader';
 
 export class MessageFeed extends Block {
   constructor() {
     super({
-      SendMessageForm: new SendMessageForm(),
-      messageList: new MessagesList(),
-      ActionButton: new Button({
-        variant: 'clean',
-        className: styles.btnChatActions,
-        children: new Image({
-          src: menuIcon,
-        }),
-      }),
+      ChatNotSelected: new ChatNotSelected(),
+      SendMessageForm: null,
+      MessageList: null,
+      ChatHeader: null,
+    });
+
+    store.on(STORE_EVENTS.updated, () => {
+      const state = store.getState();
+
+      if (state.chatId) {
+        this.setProps({
+          ChatHeader: new ChatHeader(),
+          SendMessageForm: new SendMessageForm(),
+          MessageList: new MessagesList(),
+          ChatNotSelected: null,
+        });
+      } else {
+        this.setProps({ ChatNotSelected: new ChatNotSelected() });
+      }
     });
   }
 

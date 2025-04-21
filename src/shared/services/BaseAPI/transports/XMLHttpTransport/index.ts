@@ -46,8 +46,12 @@ export class XMLHttpTransport implements ApiTransport {
     return this._transformResponse<TResData, TError>(xhr);
   }
 
-  async delete<TResData = unknown, TError = unknown>(url: string, options: ApiRequestOptions): Promise<ApiResponse<TResData, TError>> {
-    const xhr = await this._request(url, undefined, { method: METHODS.DELETE, ...options });
+  async delete<TResData = unknown, TReqData = unknown, TError = unknown>(
+    url: string,
+    data?: TReqData,
+    options?: ApiRequestOptions,
+  ): Promise<ApiResponse<TResData, TError>> {
+    const xhr = await this._request(url, data, { method: METHODS.DELETE, ...options });
     return this._transformResponse<TResData, TError>(xhr);
   }
 

@@ -1,5 +1,5 @@
 import { Block } from '@/shared/services/Block';
-import { Button, Icon, Image, Input } from '@/shared/ui';
+import { Button, Icon, Image } from '@/shared/ui';
 import { LeftPanel, ModalUpdateAvatar, ModalUpdatePassword, ModalUpdateProfile } from '@/widgets';
 import { tmpl } from './ProfilePage.tmpl';
 import { ITEMS } from './constants';

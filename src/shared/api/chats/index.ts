@@ -1,5 +1,6 @@
 import { baseAPI } from '@/shared/services';
 import { convertObjKeysToSnakeCase } from '@/shared/utils';
+import { Chat, User } from '@/types';
 
 export interface ReqCreateChat {
   title: string;
@@ -11,6 +12,20 @@ export interface ReqGetAllChats {
   title: string;
 }
 
+export interface ReqGetChatUsers {
+  chatId: Chat['id'];
+}
+
+export interface ReqAddUsersToChat {
+  users: User['id'][];
+  chatId: Chat['id'];
+}
+
+export interface ReqDeleteUsersFromChat {
+  users: User['id'][];
+  chatId: Chat['id'];
+}
+
 export class ChatsAPI {
   static getAll(data?: ReqGetAllChats) {
     return baseAPI.get('/chats', { credentials: 'include', params: data });
@@ -20,24 +35,21 @@ export class ChatsAPI {
     return baseAPI.post('/chats', JSON.stringify(convertObjKeysToSnakeCase(data)), { credentials: 'include' });
   }
 
-  static getToken(chatId: number) {
-    return baseAPI.post<{
-      token: string;
-    }>(`/chats/token/${chatId}`, {}, { credentials: 'include' });
+  static getChatUsers(data: ReqGetChatUsers) {
+    return baseAPI.get(`/chats/${data.chatId}/users`, { credentials: 'include' });
   }
 
-  // static async signIn(data: { login: string; password: string }) {
-  //   const response = await baseAPI.post<'OK'>('/auth/signin', data, {
-  //     credentials: 'include',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //     },
-  //   });
+  static getToken(chatId: string) {
+    return baseAPI.post<{
+      token: string;
+    }>(`/chats/token/${chatId}`, JSON.stringify({}), { credentials: 'include' });
+  }
 
-  //   if (response.status === 401) {
-  //     // Отчистка токенов
-  //   }
+  static addUsersToChat(data: ReqAddUsersToChat) {
+    return baseAPI.put(`/chats/users`, JSON.stringify(data), { credentials: 'include' });
+  }
 
-  //   return response;
-  // }
+  static deleteUsersFromChat(data: ReqDeleteUsersFromChat) {
+    return baseAPI.delete(`/chats/users`, JSON.stringify(data), { credentials: 'include' });
+  }
 }

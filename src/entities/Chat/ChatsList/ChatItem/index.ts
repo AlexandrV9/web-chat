@@ -3,11 +3,10 @@ import { Block } from '@/shared/services';
 import styles from './ChatItem.module.scss';
 
 import { Chat } from '@/types';
-import { navigate } from '@/shared/utils';
 
 export interface ChatItemProps {
   data: Chat;
-  onClick?: (chatId: number) => void;
+  onClick?: (chatId: Chat['id']) => void;
 }
 
 export class ChatItem extends Block {
@@ -21,7 +20,9 @@ export class ChatItem extends Block {
       events: {
         click: (event: MouseEvent) => {
           event.preventDefault();
-          onClick?.(this.props.id);
+          if (data) {
+            onClick?.(data.id);
+          }
         },
       },
     });
@@ -41,7 +42,7 @@ export class ChatItem extends Block {
         <p class=${styles.message}>{{last_message.content}}</p>
         <div class=${styles.counter}>{{unreadCount}}</div>
       </div>
-    </div>
+      </div>
     </li>
     `;
   }

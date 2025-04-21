@@ -1,4 +1,4 @@
-import { ChatsAPI, ReqCreateChat } from '@/shared/api';
+import { ChatsAPI, ReqAddUsersToChat, ReqCreateChat, ReqDeleteUsersFromChat, ReqGetChatUsers } from '@/shared/api';
 import { store } from '@/shared/services';
 
 export class ChatController {
@@ -10,13 +10,25 @@ export class ChatController {
     });
   }
 
-  static async getMessageToken(chatId: number) {
-    return ChatsAPI.getToken(chatId).then(auth => {
-      return auth;
+  static async getChatToken(chatId: string) {
+    return ChatsAPI.getToken(chatId).then(res => {
+      return res.data?.token;
     });
+  }
+
+  static async getChatUsers(data: ReqGetChatUsers) {
+    return ChatsAPI.getChatUsers(data);
   }
 
   static async createChat(data: ReqCreateChat) {
     return ChatsAPI.createChat(data);
+  }
+
+  static async addUsersToChat(data: ReqAddUsersToChat) {
+    return ChatsAPI.addUsersToChat(data);
+  }
+
+  static async deleteUsersFromChat(data: ReqDeleteUsersFromChat) {
+    return ChatsAPI.deleteUsersFromChat(data);
   }
 }

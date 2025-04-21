@@ -30,7 +30,11 @@ export interface ApiTransport {
     options?: ApiRequestOptions,
   ): Promise<ApiResponse<TResData, TError>>;
 
-  delete<TResData = unknown, TError = unknown>(url: string, options?: ApiRequestOptions): Promise<ApiResponse<TResData, TError>>;
+  delete<TResData = unknown, TReqData = unknown, TError = unknown>(
+    url: string,
+    data?: TReqData,
+    options?: ApiRequestOptions,
+  ): Promise<ApiResponse<TResData, TError>>;
 }
 
 export interface ApiResponse<T = unknown, U = unknown> {

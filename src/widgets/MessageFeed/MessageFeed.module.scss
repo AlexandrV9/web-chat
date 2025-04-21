@@ -3,6 +3,7 @@
   display: flex;
   flex-direction: column;
   height: 100vh;
+  overflow: hidden;
 
   .top {
     border-bottom: var(--border-primary);
@@ -55,51 +56,7 @@
   }
 }
 
-.formSendMessage {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
 
-  .btnAttach {
-    width: 2.4rem;
-    height: 2.4rem;
-    color: var(--secondary-color);
-  }
-
-  .inpTextMessage {
-    flex: 1;
-    padding: 1rem 2rem;
-    border-radius: 3rem;
-    background-color: var(--bg-tertiary);
-  }
-
-  .btnSendMessage {
-    width: 2.8rem;
-    height: 2.8rem;
-    border-radius: 50%;
-    display: grid;
-    place-items: center;
-    color: var(--btn-primary-color);
-    background-color: var(--btn-primary-bg);
-
-    svg {
-      width: 60%;
-      height: 60%;
-    }
-  }
-}
-
-.fallbackContainer {
-  width: 100%;
-  height: 100%;
-  display: grid;
-  place-items: center;
-
-  p {
-    font: var(--font-m);
-    color: var(--secondary-color);
-  }
-}
 
 .btnEdit {
   width: 2rem;

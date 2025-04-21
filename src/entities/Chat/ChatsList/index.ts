@@ -7,7 +7,7 @@ import styles from './styles.module.scss';
 import { Chat } from '@/types';
 
 interface ChatsListProps {
-  onSelect?: (chatId: string) => void;
+  onSelect?: (chatId: Chat['id']) => void;
 }
 
 export class ChatsList extends Block {
@@ -21,10 +21,7 @@ export class ChatsList extends Block {
 
     store.on(STORE_EVENTS.updated, () => {
       const { chats } = store.getState() as { chats: Chat[] };
-
-      if (!chats) return;
-
-      this.setProps({ list: chats.map(item => new ChatItem({ data: item, onClick: this.props.onSelect })) });
+      this.setProps({ list: chats?.map(item => new ChatItem({ data: item, onClick: this.props.onSelect })) ?? [] });
     });
   }
 

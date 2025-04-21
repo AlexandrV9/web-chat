@@ -5,11 +5,12 @@ import { Button, Icon, Input } from '@/shared/ui';
 
 import styles from './LeftPanel.module.scss';
 import { store } from '@/shared/services';
-import { messageController } from '@/shared/controllers';
+import { ChatController, messageController } from '@/shared/controllers';
 
 import plusIcon from '@/shared/assets/icons/plus-circle.svg';
 import { tmpl } from './LeftPanel.tmpl';
 import { ModalCreateChat } from '../ModalCreateChat';
+import { Chat } from '@/types';
 
 interface LeftPanelProps {
   title?: string;
@@ -20,10 +21,7 @@ export class LeftPanel extends Block {
     super({
       title,
       children: new ChatsList({
-        onSelect: chatId => {
-          messageController.leave();
-          store.setState({ chatId, messages: [] });
-        },
+        onSelect: chatId => this.setSelectedChat(chatId),
       }),
       Navbar: new Navbar(),
       searchInput: new Input({}),
@@ -38,6 +36,18 @@ export class LeftPanel extends Block {
         },
       }),
     });
+  }
+
+  private async setSelectedChat(chatId: Chat['id']) {
+    const state = store.getState();
+
+    console.log(state);
+    // messageController.leave();
+
+    const token = await ChatController.getChatToken(String(chatId));
+    const selectedChat = state.chats.find((chat: Chat) => chat.id === chatId);
+
+    store.setState({ chatId, selectedChat, messages: [] });
   }
 
   render() {

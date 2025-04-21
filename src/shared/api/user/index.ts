@@ -11,6 +11,10 @@ export interface ReqUpdatePassword {
 
 export type ReqUpdateAvatar = FormData;
 
+export interface ReqSearchUser {
+  login: string;
+}
+
 export class UserAPI {
   static async updateProfile(data: ReqUpdateProfile) {
     return baseAPI.put<User>('/user/profile', JSON.stringify(convertObjKeysToSnakeCase(data)), { credentials: 'include' });
@@ -26,5 +30,9 @@ export class UserAPI {
 
   static async updatePassword(data: ReqUpdatePassword) {
     return baseAPI.put('/user/password', JSON.stringify(convertObjKeysToSnakeCase(data)), { credentials: 'include' });
+  }
+
+  static async searchUser(data: ReqSearchUser) {
+    return baseAPI.post<User[]>('/user/search', JSON.stringify(convertObjKeysToSnakeCase(data)), { credentials: 'include' });
   }
 }
