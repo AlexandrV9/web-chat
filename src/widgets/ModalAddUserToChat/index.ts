@@ -142,7 +142,7 @@ interface ModalAddUserToChatProps {
 export class ModalAddUserToChat extends Modal {
   constructor({ isOpen = false }: ModalAddUserToChatProps) {
     super({
-      isOpen: true,
+      isOpen,
       onClose: () => this.setProps({ isOpen: false }),
       children: new ModalContent(),
     });

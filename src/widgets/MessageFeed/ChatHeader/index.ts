@@ -19,7 +19,6 @@ export class ChatHeader extends Block {
             new MenuItem({
               text: 'Обновить список участников чата',
               onClick: () => {
-                console.log(this.getPropValue('ModalAddUserToChat'));
                 this.getPropValue('ModalAddUserToChat').setProps({
                   isOpen: true,
                 });

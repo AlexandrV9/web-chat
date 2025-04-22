@@ -8,6 +8,7 @@ class MessageController {
   private _chatId!: number;
   private _token!: string;
   private _ping!: NodeJS.Timeout;
+  private _retryCount = 0;
 
   constructor() {
     this._handleOpen = this._handleOpen.bind(this);
@@ -19,31 +20,28 @@ class MessageController {
   private _addEvents() {
     this._ws.addEventListener('open', this._handleOpen);
     this._ws.addEventListener('close', this._handleClose);
-    this._ws.addEventListener('error', this._handleError);
     this._ws.addEventListener('message', this._handleMassage);
+    this._ws.addEventListener('error', this._handleError);
   }
 
   private _removeEvents() {
     this._ws.removeEventListener('open', this._handleOpen);
     this._ws.removeEventListener('close', this._handleClose);
     this._ws.removeEventListener('message', this._handleMassage);
+    this._ws.addEventListener('error', this._handleError);
   }
 
   private _handleOpen() {
+    console.log('Соединение установлено');
     this.getMessages({ offset: 0 });
+
     this._ping = setInterval(() => {
       this._ws.send('');
     }, 10000);
   }
 
-  private _handleError(evt: ErrorEvent) {
-    console.log('handleError', evt.message);
-  }
-
   private _handleMassage(evt: MessageEvent) {
     const data = JSON.parse(evt.data);
-
-    console.log('data', data);
 
     if (Array.isArray(data)) {
       if (!data.length) {
@@ -59,12 +57,36 @@ class MessageController {
       store.setState({ messages });
     }
   }
-  private _handleClose(evt: CloseEventInit) {
+
+  private _handleClose(event: CloseEventInit) {
     this._removeEvents();
 
-    if (evt.code === 1006) {
-      this._reconnect();
+    console.log('_handleClose', event);
+
+    console.log(`Код: ${event.code} | Причина: ${event}`);
+
+    if (this._retryCount >= 10) {
+      return;
     }
+
+    if (event.code === 1006) {
+      this._reconnect();
+      this._retryCount += 1;
+    }
+  }
+
+  private _handleError(e: Event) {
+    console.log('handleError', e);
+  }
+
+  public connect({ userId, chatId, token }: ReqWebSocketConnect) {
+    this._userId = userId;
+    this._chatId = chatId;
+    this._token = token;
+
+    console.log(userId, chatId, token)
+    this._ws = new WebSocket(`wss://ya-praktikum.tech/ws/chats/${userId}/${chatId}/${token}`);
+    this._addEvents();
   }
 
   private _reconnect() {
@@ -73,14 +95,6 @@ class MessageController {
       chatId: this._chatId,
       token: this._token,
     });
-  }
-
-  public connect({ userId, chatId, token }: ReqWebSocketConnect) {
-    this._userId = userId;
-    this._chatId = chatId;
-    this._token = token;
-    this._ws = new WebSocket(`wss://ya-praktikum.tech/ws/chats/${userId}/${chatId}/${token}`);
-    this._addEvents();
   }
 
   public getMessages(options: { offset: number }) {

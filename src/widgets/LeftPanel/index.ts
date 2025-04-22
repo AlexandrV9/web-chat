@@ -41,11 +41,14 @@ export class LeftPanel extends Block {
   private async setSelectedChat(chatId: Chat['id']) {
     const state = store.getState();
 
-    console.log(state);
-    // messageController.leave();
+    messageController.leave();
 
     const token = await ChatController.getChatToken(String(chatId));
     const selectedChat = state.chats.find((chat: Chat) => chat.id === chatId);
+
+    if (token) {
+      messageController.connect({ userId: state.user.id, chatId, token });
+    }
 
     store.setState({ chatId, selectedChat, messages: [] });
   }
