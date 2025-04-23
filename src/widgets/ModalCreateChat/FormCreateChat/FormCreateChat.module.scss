@@ -1,0 +1,17 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.title {
+  font: var(--font-m);
+  font-weight: 600;
+  text-align: center;
+}
+
+.actionSlot {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}

@@ -1,58 +1,95 @@
-import { Block } from '../../services/Block';
+import { Block, Store, STORE_EVENTS } from '@/shared/services';
 
-import cls from './styles.module.scss';
+import styles from './SignUpForm.module.scss';
 
-import tmpl from './tmpl';
-import { INPUT_FIELDS } from './constants';
-import { Button, FieldInput } from '@/components';
-import { firstNameValidator, loginValidator, passwordValidator } from '@/services/Validator';
+import { tmpl } from './SignUpForm.tmpl';
+import { INPUT_FIELDS, INPUT_NAMES } from './constants';
+import { Button, FieldInput, Link } from '@/shared/ui';
+import { APP_ROUTES } from '@/shared/constants';
+import { AuthController, ReqAuthSignUp } from '@/shared/controllers';
+import { PlainObject } from '@/types';
+
+const store = new Store(
+  Object.keys(INPUT_NAMES).reduce((acc: PlainObject, key) => {
+    acc[key] = false;
+    return acc;
+  }, {}),
+);
 
 export class SignUpForm extends Block {
   constructor() {
     super({
+      errorForm: '',
+      linkToSignInPage: new Link({
+        className: styles.link,
+        to: APP_ROUTES.SIGN_IN,
+        children: 'Войти',
+      }),
+      Inputs: INPUT_FIELDS.map(
+        item =>
+          new FieldInput({
+            ...item,
+            onValid: isValid => {
+              store.setState({ [item.name]: isValid });
+            },
+          }),
+      ),
+      SubmitButton: new Button({
+        disabled: true,
+        variant: 'success',
+        className: styles.btnSubmit,
+        children: 'Зарегистрироваться',
+        type: 'submit',
+      }),
       events: {
-        submit: (e: Event) => {
-          e.preventDefault();
-          e.stopPropagation();
+        submit: async (event: Event) => {
+          event.preventDefault();
 
-          const formData = new FormData(e.target as HTMLFormElement);
-          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-          // @ts-ignore
-          const values = Object.fromEntries(formData.entries());
+          const { elements } = event.target as HTMLFormElement;
 
-          let isValid = true;
+          const inputs = Array.from(elements).filter(el => {
+            return el.nodeName === 'INPUT';
+          }) as HTMLInputElement[];
 
-          console.log(values);
+          const formData = inputs.reduce((acc: Record<string, string>, input) => {
+            acc[input.name] = input.value;
+            return acc;
+          }, {}) as unknown as ReqAuthSignUp;
 
-          isValid = !loginValidator(values.email);
-          isValid = !loginValidator(values.login);
-          isValid = !loginValidator(values.phone);
-          isValid = !passwordValidator(values.password);
-          isValid = !firstNameValidator(values.first_name);
-          isValid = !firstNameValidator(values.second_name);
-          isValid = !firstNameValidator(values.password);
+          const state = store.getState();
+          const isNotValid = Object.values(state).includes(false);
 
-          if (isValid) {
-            console.log(values);
-          } else {
-            const errorEl = document.querySelector(`.${cls.error}`);
+          this.setProps({
+            errorForm: isNotValid ? 'Некоторые поля формы заполнены не верно' : '',
+          });
 
-            if (errorEl) {
-              errorEl.classList.add(cls.visible);
-            }
+          if (isNotValid) {
+            return;
           }
+
+          AuthController.signUp(formData).catch(() => {
+            this.setProps({
+              errorForm: 'Не удалось создать пользователя, попробуйте еще раз',
+            });
+          });
         },
       },
-      Inputs: INPUT_FIELDS.map(item => new FieldInput(item)),
-      SubmitButton: new Button({
-        className: cls.btnSubmit,
-        children: 'Зарегистрироваться',
-        htmlType: 'submit',
-      }),
+    });
+
+    store.on(STORE_EVENTS.updated, () => {
+      const state = store.getState();
+
+      const submitButton = this.getPropValue('SubmitButton');
+
+      submitButton.setProps({
+        disabled: Object.values(state).includes(false),
+      });
     });
   }
 
   render() {
-    return tmpl;
+    const errorFormText = this.getPropValue('errorForm');
+
+    return tmpl(errorFormText);
   }
 }

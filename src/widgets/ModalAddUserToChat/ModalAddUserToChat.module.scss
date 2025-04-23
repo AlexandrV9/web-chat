@@ -1,0 +1,35 @@
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.form {
+  display: flex;
+  gap: 10px;
+}
+
+.list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.searchInput {
+  width: 100%;
+  border: 1px solid var(--secondary-color);
+  border-radius: 8px;
+  font: var(--font-base);
+  font-weight: 500;
+}
+
+.text {
+  font-size: 14px;
+  line-height: 22px;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}

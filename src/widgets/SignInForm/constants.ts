@@ -1,20 +1,23 @@
-import { loginValidator, passwordValidator } from '@/services/Validator';
+import { loginValidator, passwordValidator } from '@/shared/services/Validator';
+
+export const INPUT_NAMES = {
+  login: 'login',
+  password: 'password',
+} as const;
 
 export const INPUT_FIELDS = [
   {
-    id: 'login',
-    name: 'login',
+    id: INPUT_NAMES.login,
+    name: INPUT_NAMES.login,
     label: 'Логин',
-    value: '',
     type: 'text',
     textError: '',
     validator: loginValidator,
   },
   {
-    id: 'password',
-    name: 'password',
+    id: INPUT_NAMES.password,
+    name: INPUT_NAMES.password,
     label: 'Пароль',
-    value: '',
     type: 'password',
     autocomplete: false,
     textError: '',

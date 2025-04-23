@@ -1,0 +1,37 @@
+.button {
+  padding: 10px 20px;
+  border-radius: 12px;
+  border: 1px solid transparent;
+  display: grid;
+  place-items: center;
+
+  &.primary {
+    color: black;
+    background-color: transparent;
+    border-color: black;
+  }
+
+  &.secondary {
+    color: white;
+    background-color: black;
+  }
+
+  &.success {
+    color: black;
+    background-color: #5be862;
+  }
+
+  &.alert {
+    color: black;
+    background-color: #e85b5b;
+  }
+
+  &.clean {
+    padding: 0;
+  }
+
+  &:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+}
