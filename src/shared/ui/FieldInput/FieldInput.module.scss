@@ -6,11 +6,14 @@
   .label {
     color: var(--text-secondary-color);
     font: var(--font-base);
+    margin-bottom: 2px;
   }
 
   .input {
     font: var(--font-base);
     font-weight: 500;
+    border: 1px solid var(--secondary-color);
+    border-radius: 8px;
   }
 
   .error {
@@ -18,15 +21,6 @@
     color: var(--text-alert-color);
     position: absolute;
     bottom: -18px;
-  }
-
-  .label {
-    margin-bottom: 2px;
-  }
-
-  .input {
-    border: 1px solid var(--secondary-color);
-    border-radius: 8px;
   }
 
   &:not(:last-of-type) {

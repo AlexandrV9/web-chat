@@ -1,6 +1,13 @@
 import { store } from '@/shared/services';
 import { ReqWebSocketConnect } from './types';
 import { convertObjKeysToCamelCase } from '@/shared/utils';
+import { Message } from '@/types';
+
+const sortedMessages = (messages: Message[]) => {
+  return messages.sort((a, b) => {
+    return new Date(a.time).getTime() - new Date(b.time).getTime();
+  });
+};
 
 class MessageController {
   private _ws!: WebSocket;
@@ -36,34 +43,43 @@ class MessageController {
     this.getMessages({ offset: 0 });
 
     this._ping = setInterval(() => {
-      this._ws.send('');
+      this._ws.send(
+        JSON.stringify({
+          content: '',
+          type: 'ping',
+        }),
+      );
     }, 10000);
   }
 
-  private _handleMassage(evt: MessageEvent) {
-    const data = JSON.parse(evt.data);
+  private _handleMassage(event: MessageEvent) {
+    const data = JSON.parse(event.data);
+    const state = store.getState();
+
+    if (!Object.prototype.hasOwnProperty.call(state, 'messages')) {
+      store.setState({ messages: [] });
+    }
 
     if (Array.isArray(data)) {
       if (!data.length) {
         store.setState({ messages: [] });
       } else if (data[0].id === 0) {
-        store.setState({ messages: data.map(item => convertObjKeysToCamelCase(item)) });
+        store.setState({ messages: sortedMessages(data.map(item => convertObjKeysToCamelCase(item))) });
       } else {
-        const messages = [...store.state.messages, ...data.map(item => convertObjKeysToCamelCase(item))];
+        const messages = sortedMessages([...store.state.messages, ...data.map(item => convertObjKeysToCamelCase(item))]);
         store.setState({ messages });
       }
-    } else if (typeof data === 'object' && data.type === 'message') {
-      const messages = [data, ...store.state.messages];
+      return;
+    }
+
+    if (typeof data === 'object' && data.type === 'message') {
+      const messages = sortedMessages([convertObjKeysToCamelCase(data), ...store.state.messages]);
       store.setState({ messages });
     }
   }
 
   private _handleClose(event: CloseEventInit) {
     this._removeEvents();
-
-    console.log('_handleClose', event);
-
-    console.log(`Код: ${event.code} | Причина: ${event}`);
 
     if (this._retryCount >= 10) {
       return;
@@ -84,7 +100,6 @@ class MessageController {
     this._chatId = chatId;
     this._token = token;
 
-    console.log(userId, chatId, token)
     this._ws = new WebSocket(`wss://ya-praktikum.tech/ws/chats/${userId}/${chatId}/${token}`);
     this._addEvents();
   }

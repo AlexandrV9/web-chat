@@ -199,7 +199,7 @@ export abstract class Block<TProps extends BlockProps = BlockProps> {
     }) as TProps;
   }
 
-  public componentDidMount(oldProps: Partial<TProps>) {}
+  public componentDidMount(_oldProps: Partial<TProps>) {}
 
   public componentDidUpdate(oldProps: Partial<TProps>, newProps: TProps): boolean {
     return oldProps !== newProps;

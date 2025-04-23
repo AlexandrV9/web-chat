@@ -1,8 +1,7 @@
 import { isPlainObject } from '@/shared/utils/_common';
 import { xmlHttpRequest } from './transports';
 import { ApiRequestOptions, ApiResponse, ApiTransport } from './types';
-import { convertObjKeysToCamelCase, convertObjKeysToSnakeCase } from '@/shared/utils';
-import { PlainObject } from '@/types';
+import { convertObjKeysToCamelCase } from '@/shared/utils';
 import { HOST_API } from '@/shared/constants';
 
 type ApiOptions = {

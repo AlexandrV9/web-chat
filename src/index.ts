@@ -17,7 +17,9 @@ async function checkIsAuth() {
         navigate(APP_ROUTES.CONVERSATIONS);
       }
     }
-  } catch (e) {}
+  } catch (e) {
+    console.log(e);
+  }
 }
 
 export class App {

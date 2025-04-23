@@ -3,8 +3,6 @@ import { Icon, Typography } from '@/shared/ui';
 
 import iconUpload from '@/shared/assets/icons/upload.svg';
 
-import styles from './PreloadContent.module.scss';
-
 export class PreloadContent extends Block {
   constructor() {
     super({
@@ -15,7 +13,7 @@ export class PreloadContent extends Block {
 
   render() {
     return `
-      <div class=${styles.preloadContent}>
+      <div>
         {{{ IconUpload }}}
         {{{ LabelText }}}
       </div>

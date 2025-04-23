@@ -14,21 +14,21 @@ export class ChatsList extends Block {
   constructor({ onSelect }: ChatsListProps) {
     super({
       onSelect,
-      list: [],
+      List: [],
     });
 
     ChatController.getChats();
 
     store.on(STORE_EVENTS.updated, () => {
       const { chats } = store.getState() as { chats: Chat[] };
-      this.setProps({ list: chats?.map(item => new ChatItem({ data: item, onClick: this.props.onSelect })) ?? [] });
+      this.setProps({ List: chats?.map(item => new ChatItem({ data: item, onClick: this.props.onSelect })) ?? [] });
     });
   }
 
   render() {
     return `
       <ul class=${styles.chatsList}>
-        {{{list}}}
+        {{{ List }}}
       </ul>
     `;
   }

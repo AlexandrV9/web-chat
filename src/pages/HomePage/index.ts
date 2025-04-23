@@ -1,6 +1,6 @@
 import { Block } from '@/shared/services/Block';
 
-import tmpl from './HomePage.tmpl';
+import { tmpl } from './HomePage.tmpl';
 import { LeftPanel } from '@/widgets';
 import { MessageFeed } from '@/widgets/MessageFeed';
 

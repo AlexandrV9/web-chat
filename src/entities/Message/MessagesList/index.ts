@@ -1,11 +1,9 @@
 import { Block } from '@/shared/services/Block';
 import { MessageBubble } from '../MessageBubble';
 import { store, STORE_EVENTS } from '@/shared/services';
-import { AuthController, ChatController, messageController } from '@/shared/controllers';
 
 import styles from './MessagesList.module.scss';
-
-const list = Array.from({ length: 30 }).map((_, index) => new MessageBubble({ isMy: index % 2 === 0 }));
+import { Message, User } from '@/types';
 
 export class MessagesList extends Block {
   constructor() {
@@ -14,25 +12,13 @@ export class MessagesList extends Block {
     });
 
     store.on(STORE_EVENTS.updated, async () => {
-      // const state = store.getState();
+      const { messages = [], user } = store.getState();
 
-      // const chatId = state.chatId;
-      // const userId = state.user.data.id;
-
-      // if (!chatId || !userId) return;
-
-      // const response = await ChatController.getMessageToken(chatId);
-      // const token = response.data?.token;
-
-      // if (!token) return;
-
-      // messageController.connect({
-      //   userId,
-      //   chatId,
-      //   token,
-      // });
-
-      // this.setProps({});
+      this.setProps({
+        list: (messages as Message[]).map(message => {
+          return new MessageBubble({ isMy: message.userId === (user as User).id, ...message });
+        }),
+      });
     });
   }
 

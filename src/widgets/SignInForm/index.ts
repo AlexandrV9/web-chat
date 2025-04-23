@@ -35,7 +35,7 @@ export class SignInForm extends Block {
           }),
       ),
       SubmitButton: new Button({
-        // disabled: true,
+        disabled: true,
         variant: 'success',
         className: styles.btnSubmit,
         children: 'Войти',
@@ -63,9 +63,9 @@ export class SignInForm extends Block {
             errorForm: isNotValid ? 'Некоторые поля формы заполнены не верно' : '',
           });
 
-          // if (isNotValid) {
-          //   return;
-          // }
+          if (isNotValid) {
+            return;
+          }
 
           AuthController.signIn(formData).catch(() => {
             this.setProps({
@@ -81,9 +81,9 @@ export class SignInForm extends Block {
 
       const submitButton = this.getPropValue('SubmitButton');
 
-      // submitButton.setProps({
-      //   disabled: Object.values(state).includes(false),
-      // });
+      submitButton.setProps({
+        disabled: Object.values(state).includes(false),
+      });
     });
   }
 

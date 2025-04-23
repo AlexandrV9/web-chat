@@ -1,11 +1,12 @@
 import { ChatsAPI, ReqAddUsersToChat, ReqCreateChat, ReqDeleteUsersFromChat, ReqGetChatUsers } from '@/shared/api';
 import { store } from '@/shared/services';
+import { convertObjKeysToCamelCase } from '@/shared/utils';
 
 export class ChatController {
   static async getChats() {
     return ChatsAPI.getAll().then(res => {
       store.setState({
-        chats: res.data,
+        chats: res.data?.map(chat => convertObjKeysToCamelCase(chat)),
       });
     });
   }

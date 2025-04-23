@@ -28,7 +28,7 @@ export interface ReqDeleteUsersFromChat {
 
 export class ChatsAPI {
   static getAll(data?: ReqGetAllChats) {
-    return baseAPI.get('/chats', { credentials: 'include', params: data });
+    return baseAPI.get<Chat[]>('/chats', { credentials: 'include', params: data });
   }
 
   static createChat(data: ReqCreateChat) {

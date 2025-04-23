@@ -1,7 +1,5 @@
 import { Block } from '@/shared/services';
 
-import styles from './FormCreateChat.module.scss';
-
 import { Button, FieldInput } from '@/shared/ui';
 import { ReqCreateChat } from '@/shared/api';
 import { tmpl } from './FormCreateChat.tmpl';

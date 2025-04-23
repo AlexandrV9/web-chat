@@ -1,9 +1,10 @@
 import { Block } from '@/shared/services';
 
 import { tmpl } from './Menu.tmpl';
+import { MenuItem } from './MenuItem';
 
 export interface MenuProps {
-  Items: any[];
+  Items: MenuItem[];
 }
 
 export class Menu extends Block {

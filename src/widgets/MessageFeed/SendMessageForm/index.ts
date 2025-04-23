@@ -6,6 +6,7 @@ import styles from './SendMessageForm.module.scss';
 
 import paperClipIcon from '@/shared/assets/icons/paper-clip.svg';
 import arrowRightIcon from '@/shared/assets/icons/arrow-right.svg';
+import { messageController } from '@/shared/controllers';
 
 export class SendMessageForm extends Block {
   constructor() {
@@ -23,6 +24,7 @@ export class SendMessageForm extends Block {
       }),
       ButtonSubmit: new Button({
         variant: 'clean',
+        type: 'submit',
         className: styles.btnSendMessage,
         children: new Icon({ src: arrowRightIcon, size: 20 }),
       }),
@@ -30,18 +32,13 @@ export class SendMessageForm extends Block {
         submit: (event: Event) => {
           event.preventDefault();
 
-          const { elements } = event.target as HTMLFormElement;
+          const input = this.getPropValue('InputMessage').getContent();
 
-          const inputs = Array.from(elements).filter(el => {
-            return el.nodeName === 'INPUT';
-          }) as HTMLInputElement[];
+          if (!input.value) {
+            return;
+          }
 
-          const formData = inputs.reduce((acc: Record<string, string>, input) => {
-            acc[input.name] = input.value;
-            return acc;
-          }, {}) as unknown;
-
-          console.log(formData);
+          messageController.sendMessage(input.value);
         },
       },
     });

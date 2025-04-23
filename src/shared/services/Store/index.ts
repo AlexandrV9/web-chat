@@ -8,7 +8,7 @@ export const STORE_EVENTS = {
 } as const;
 
 export class Store extends EventBus {
-  private state: State = {};
+  public state: State = {};
 
   constructor(initialState?: State) {
     super();

@@ -1,12 +1,10 @@
-import { Store, store, STORE_EVENTS } from '@/shared/services';
+import { Store, STORE_EVENTS } from '@/shared/services';
 import { Block } from '@/shared/services/Block';
 import { Button, Typography } from '@/shared/ui';
 import { tmpl } from './FormUpdateAvatar.tmpl';
 
-import { ReqUpdateProfile } from '@/shared/api';
 import { UserController } from '@/shared/controllers/UserController';
 import { DropArea } from './DropArea';
-import { HOST_API } from '@/shared/constants';
 
 const initialState = {
   file: '',
@@ -77,12 +75,6 @@ export class FormUpdateAvatar extends Block {
       const state = formStore.getState();
       const submitButton = this.getPropValue('ButtonSubmit') as Block;
       submitButton.setProps({ disabled: !state.file });
-    });
-  }
-
-  componentDidMount() {
-    store.on(STORE_EVENTS.updated, () => {
-      const state = store.getState();
     });
   }
 

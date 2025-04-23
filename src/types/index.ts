@@ -3,6 +3,17 @@ export type PlainObject<T = any> = {
   [key in string]: T;
 };
 
+export interface Message {
+  chatId: number;
+  content: string;
+  file: null;
+  id: number;
+  isRead: boolean;
+  time: string;
+  type: 'message';
+  userId: number;
+}
+
 export interface User {
   id: number;
   firstName: string;
@@ -18,8 +29,8 @@ export interface Chat {
   id: number;
   title: string;
   avatar: string | null;
-  unread_count: number;
-  created_by: number;
+  unreadCount: number;
+  createdBy: number;
   lastMessage: {
     user: User;
     time: string;

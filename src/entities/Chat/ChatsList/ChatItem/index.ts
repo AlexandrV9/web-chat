@@ -14,9 +14,9 @@ export class ChatItem extends Block {
     super({
       id: data.id,
       title: data.title,
-      unreadCount: data.unread_count,
+      unreadCount: data.unreadCount,
       lastMessage: data.lastMessage?.content ?? '',
-      createdBy: new Date(data.created_by),
+      createdBy: new Date(data.createdBy),
       events: {
         click: (event: MouseEvent) => {
           event.preventDefault();
@@ -31,16 +31,15 @@ export class ChatItem extends Block {
   render() {
     return `
       <li class=${styles.chatItem}>
-        <div class=${styles.avatar}>И</div>
+        <div class=${styles.avatar}>T</div>
         <div class=${styles.container}>
         <div class=${styles.titleWrapper}>
-        <p class=${styles.title}>{{title}}</p>
-        <span class=${styles.time}>10:49</span>
+        <p class=${styles.title}>{{ title }}</p>
       </div>
 
       <div class=${styles.content}>
-        <p class=${styles.message}>{{last_message.content}}</p>
-        <div class=${styles.counter}>{{unreadCount}}</div>
+        <p class=${styles.message}>{{ lastMessage }}</p>
+        <div class=${styles.counter}>{{ unreadCount }}</div>
       </div>
       </div>
     </li>
