@@ -10,14 +10,6 @@ app.get('/', (req, res) => {
   res.sendFile(PAGE_PATHS['index']);
 });
 
-app.use((req, res) => {
-  res.status(404).sendFile(PAGE_PATHS['notFound']);
-});
-
-app.use((err, req, res, next) => {
-  res.status(500).sendFile(PAGE_PATHS['serverError']);
-});
-
 app.listen(PORT, () => {
   console.log(`Server running at http://localhost:${PORT}/`);
 });
