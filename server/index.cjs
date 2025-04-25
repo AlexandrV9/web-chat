@@ -1,13 +1,13 @@
 const express = require('express');
+const path = require('node:path');
 
-const { PORT, PAGE_PATHS, DIST_PATH } = require('./constants.cjs');
+const { PORT, DIST_PATH } = require('./constants.cjs');
 
 const app = express();
-
 app.use(express.static(DIST_PATH));
 
-app.get('/', (req, res) => {
-  res.sendFile(PAGE_PATHS['index']);
+app.get('*', (req, res) => {
+  res.sendFile(path.join(DIST_PATH, 'index.html'));
 });
 
 app.listen(PORT, () => {
