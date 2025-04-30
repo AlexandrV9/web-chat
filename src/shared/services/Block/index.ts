@@ -121,8 +121,6 @@ export abstract class Block<TProps extends BlockProps = BlockProps> {
   }
 
   private _generateMarkup(template: HTMLTemplateElement, templateProps: PlainObject) {
-    const isTest = Boolean(templateProps?.formDataId);
-
     Object.keys(templateProps).forEach(key => {
       const originalValue = this.props[key];
 
