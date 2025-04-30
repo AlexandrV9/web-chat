@@ -13,47 +13,37 @@ interface XMLHttpOptions extends ApiRequestOptions {
   method: keyof typeof METHODS;
 }
 
+type HTTPMethod = <TResData = unknown, TReqData = unknown, TError = unknown>(
+  url: string,
+  data: TReqData,
+  options: ApiRequestOptions,
+) => Promise<ApiResponse<TResData, TError>>;
+
 export class XMLHttpTransport implements ApiTransport {
   async get<TResData = unknown, TError = unknown>(url: string, options: ApiRequestOptions): Promise<ApiResponse<TResData, TError>> {
     const xhr = await this._request(url, undefined, { method: METHODS.GET, ...options });
     return this._transformResponse<TResData, TError>(xhr);
   }
 
-  async post<TResData = unknown, TReqData = unknown, TError = unknown>(
-    url: string,
-    data: TReqData,
-    options: ApiRequestOptions,
-  ): Promise<ApiResponse<TResData, TError>> {
+  post: HTTPMethod = async (url, data, options) => {
     const xhr = await this._request(url, data, { method: METHODS.POST, ...options });
-    return this._transformResponse<TResData, TError>(xhr);
-  }
+    return this._transformResponse(xhr);
+  };
 
-  async patch<TResData = unknown, TReqData = unknown, TError = unknown>(
-    url: string,
-    data: TReqData,
-    options: ApiRequestOptions,
-  ): Promise<ApiResponse<TResData, TError>> {
+  patch: HTTPMethod = async (url, data, options) => {
     const xhr = await this._request(url, data, { method: METHODS.PATCH, ...options });
-    return this._transformResponse<TResData, TError>(xhr);
-  }
+    return this._transformResponse(xhr);
+  };
 
-  async put<TResData = unknown, TReqData = unknown, TError = unknown>(
-    url: string,
-    data: TReqData,
-    options: ApiRequestOptions,
-  ): Promise<ApiResponse<TResData, TError>> {
+  put: HTTPMethod = async (url, data, options) => {
     const xhr = await this._request(url, data, { method: METHODS.PUT, ...options });
-    return this._transformResponse<TResData, TError>(xhr);
-  }
+    return this._transformResponse(xhr);
+  };
 
-  async delete<TResData = unknown, TReqData = unknown, TError = unknown>(
-    url: string,
-    data?: TReqData,
-    options?: ApiRequestOptions,
-  ): Promise<ApiResponse<TResData, TError>> {
+  delete: HTTPMethod = async (url, data, options) => {
     const xhr = await this._request(url, data, { method: METHODS.DELETE, ...options });
-    return this._transformResponse<TResData, TError>(xhr);
-  }
+    return this._transformResponse(xhr);
+  };
 
   async _request(url: string, data: unknown, options: XMLHttpOptions): Promise<XMLHttpRequest> {
     const { method = METHODS.GET, credentials, params = {}, headers } = options;

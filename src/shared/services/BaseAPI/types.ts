@@ -9,7 +9,6 @@ export interface ApiRequestOptions {
 
 export interface ApiTransport {
   get<TResData = unknown, TError = unknown>(url: string, options?: ApiRequestOptions): Promise<ApiResponse<TResData, TError>>;
-
   post<TResData = unknown, TReqData = unknown, TError = unknown>(
     url: string,
     data: TReqData,
