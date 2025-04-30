@@ -7,8 +7,6 @@ export interface ApiRequestOptions {
   params?: PlainObject;
 }
 
-// type DFwe = Request;
-
 export interface ApiTransport {
   get<TResData = unknown, TError = unknown>(url: string, options?: ApiRequestOptions): Promise<ApiResponse<TResData, TError>>;
 

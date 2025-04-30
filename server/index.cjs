@@ -1,21 +1,13 @@
 const express = require('express');
+const path = require('node:path');
 
-const { PORT, PAGE_PATHS, DIST_PATH } = require('./constants.cjs');
+const { PORT, DIST_PATH } = require('./constants.cjs');
 
 const app = express();
-
 app.use(express.static(DIST_PATH));
 
-app.get('/', (req, res) => {
-  res.sendFile(PAGE_PATHS['index']);
-});
-
-app.use((req, res) => {
-  res.status(404).sendFile(PAGE_PATHS['notFound']);
-});
-
-app.use((err, req, res, next) => {
-  res.status(500).sendFile(PAGE_PATHS['serverError']);
+app.get('*', (req, res) => {
+  res.sendFile(path.join(DIST_PATH, 'index.html'));
 });
 
 app.listen(PORT, () => {

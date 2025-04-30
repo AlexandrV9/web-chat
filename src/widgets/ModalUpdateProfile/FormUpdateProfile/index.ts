@@ -49,7 +49,6 @@ export class FormUpdateProfile extends Block {
       events: {
         submit: async (event: Event) => {
           event.preventDefault();
-
           const { elements } = event.target as HTMLFormElement;
 
           const inputs = Array.from(elements).filter(el => {
@@ -64,9 +63,10 @@ export class FormUpdateProfile extends Block {
           const state = formStore.getState();
           const isNotValid = Object.values(state).includes(false);
 
-          this.setProps({
-            errorForm: isNotValid ? 'Некоторые поля формы заполнены не верно' : '',
-          });
+          // TODO: это вызывает скрытие инпутов, вернуться и пофиксить
+          // this.setProps({
+          //   errorForm: isNotValid ? 'Некоторые поля формы заполнены не верно' : '',
+          // });
 
           if (isNotValid) {
             return;
