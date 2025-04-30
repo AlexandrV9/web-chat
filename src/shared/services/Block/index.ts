@@ -121,6 +121,8 @@ export abstract class Block<TProps extends BlockProps = BlockProps> {
   }
 
   private _generateMarkup(template: HTMLTemplateElement, templateProps: PlainObject) {
+    const isTest = Boolean(templateProps?.formDataId);
+
     Object.keys(templateProps).forEach(key => {
       const originalValue = this.props[key];
 
@@ -150,7 +152,12 @@ export abstract class Block<TProps extends BlockProps = BlockProps> {
 
   private _replaceChildWithBlock(fragment: HTMLTemplateElement, block: Block) {
     const child = fragment.content.querySelector(`[data-id='${block.id}']`);
-    child?.replaceWith(block.getContent() as Node);
+
+    try {
+      child?.replaceWith(block?.getContent() as Node);
+    } catch (e) {
+      console.log(e);
+    }
   }
 
   private _setMarkupInElement(markup: HTMLElement) {
