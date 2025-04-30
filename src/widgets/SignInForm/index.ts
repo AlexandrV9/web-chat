@@ -78,7 +78,6 @@ export class SignInForm extends Block {
 
     store.on(STORE_EVENTS.updated, () => {
       const state = store.getState();
-
       const submitButton = this.getPropValue('SubmitButton');
 
       submitButton.setProps({

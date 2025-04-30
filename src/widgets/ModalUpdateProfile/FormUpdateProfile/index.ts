@@ -7,6 +7,7 @@ import { PlainObject } from '@/types';
 import { INPUT_FIELDS } from './constants';
 import { UserController } from '@/shared/controllers/UserController';
 import { ReqUpdateProfile } from '@/shared/api';
+import { debounce } from '@/shared/utils';
 
 interface FormUpdateProfileProps {
   onCloseModal?: () => void;
@@ -47,41 +48,48 @@ export class FormUpdateProfile extends Block {
         },
       }),
       events: {
-        submit: async (event: Event) => {
+        submit: (event: Event) => {
           event.preventDefault();
-          const { elements } = event.target as HTMLFormElement;
 
-          const inputs = Array.from(elements).filter(el => {
-            return el.nodeName === 'INPUT';
-          }) as HTMLInputElement[];
+          const submitHandler = async () => {
+            const { elements } = event.target as HTMLFormElement;
 
-          const formData = inputs.reduce((acc: Record<string, string>, input) => {
-            acc[input.name] = input.value;
-            return acc;
-          }, {}) as unknown as ReqUpdateProfile;
+            const inputs = Array.from(elements).filter(el => {
+              return el.nodeName === 'INPUT';
+            }) as HTMLInputElement[];
 
-          const state = formStore.getState();
-          const isNotValid = Object.values(state).includes(false);
+            const formData = inputs.reduce((acc: Record<string, string>, input) => {
+              acc[input.name] = input.value;
+              return acc;
+            }, {}) as unknown as ReqUpdateProfile;
 
-          // TODO: это вызывает скрытие инпутов, вернуться и пофиксить
-          // this.setProps({
-          //   errorForm: isNotValid ? 'Некоторые поля формы заполнены не верно' : '',
-          // });
+            const state = formStore.getState();
+            const isNotValid = Object.values(state).includes(false);
 
-          if (isNotValid) {
-            return;
-          }
-
-          const res = await UserController.updateProfile(formData);
-
-          if (res.ok) {
-            alert('Профиль успешно обновлен');
-            onCloseModal?.();
-          } else {
+            // TODO: это вызывает скрытие инпутов, вернуться и пофиксить
             this.setProps({
-              errorForm: 'Запрос не прошел, попробуйте еще раз',
+              errorForm: isNotValid ? 'Некоторые поля формы заполнены не верно' : '',
             });
-          }
+
+            if (isNotValid) {
+              return;
+            }
+
+            const res = await UserController.updateProfile(formData);
+
+            if (res.ok) {
+              alert('Профиль успешно обновлен');
+              onCloseModal?.();
+            } else {
+              this.setProps({
+                errorForm: 'Запрос не прошел, попробуйте еще раз',
+              });
+            }
+          };
+
+          const debouncedSubmitHandler = debounce(submitHandler, 0);
+
+          debouncedSubmitHandler();
         },
       },
     });

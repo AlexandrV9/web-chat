@@ -13,3 +13,4 @@ export * from './convertObjKeysToCamelCase';
 export * from './clsx';
 export * from './convertObjKeysToSnakeCase';
 export * from './getImageSrc';
+export * from './debounce';
