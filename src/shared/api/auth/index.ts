@@ -1,10 +1,9 @@
 import { ReqAuthSignIn, ReqAuthSignUp } from '@/shared/controllers';
 import { baseAPI } from '@/shared/services';
-import { convertObjKeysToSnakeCase } from '@/shared/utils';
 
 export class AuthAPI {
   static async signIn(data: ReqAuthSignIn) {
-    const response = await baseAPI.post<'OK'>('/auth/signin', JSON.stringify(convertObjKeysToSnakeCase(data)), {
+    const response = await baseAPI.post<'OK'>('/auth/signin', JSON.stringify(data), {
       credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
@@ -24,7 +23,7 @@ export class AuthAPI {
   }
 
   static signUp(data: ReqAuthSignUp) {
-    return baseAPI.post('/auth/signup', JSON.stringify(convertObjKeysToSnakeCase(data)), {
+    return baseAPI.post('/auth/signup', JSON.stringify(data), {
       headers: {
         'Content-Type': 'application/json',
       },
@@ -38,7 +37,7 @@ export class AuthAPI {
   static async signOut() {
     const response = await baseAPI.post(
       '/auth/logout',
-      {},
+      JSON.stringify({}),
       {
         credentials: 'include',
       },

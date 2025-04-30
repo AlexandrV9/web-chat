@@ -56,6 +56,7 @@ export class SignUpForm extends Block {
             return acc;
           }, {}) as unknown as ReqAuthSignUp;
 
+
           const state = store.getState();
           const isNotValid = Object.values(state).includes(false);
 
@@ -78,7 +79,6 @@ export class SignUpForm extends Block {
 
     store.on(STORE_EVENTS.updated, () => {
       const state = store.getState();
-
       const submitButton = this.getPropValue('SubmitButton');
 
       submitButton.setProps({
