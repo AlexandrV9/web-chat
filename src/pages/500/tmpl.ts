@@ -1,4 +1,4 @@
-import cls from './styles.module.scss';
+import cls from './ServerError.module.scss';
 
 const tmpl = `
   <div class="content-page">

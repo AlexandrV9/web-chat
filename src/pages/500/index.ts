@@ -1,4 +1,4 @@
-import { Block } from '../../services/Block';
+import { Block } from '@/shared/services';
 import tmpl from './tmpl';
 
 export class ServerErrorPage extends Block {

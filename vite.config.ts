@@ -19,8 +19,6 @@ export default defineConfig({
       localsConvention: 'camelCaseOnly',
     },
   },
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
   plugins: [handlebars()],
   server: {
     port: 3000,

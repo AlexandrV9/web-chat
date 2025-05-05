@@ -1,86 +1,46 @@
+import { APP_ROUTES } from './shared/constants';
 import { HomePage, NotFoundPage, ProfilePage, ServerErrorPage, SignInPage, SignUpPage } from './pages';
+import { router } from './shared/services';
+import { WindowAPI } from './shared/services/Window';
+import { AuthAPI } from './shared/api';
+import { navigate } from './shared/utils';
+import { AuthController } from './shared/controllers';
 
-type Page = 'signIn' | 'signUp' | 'home' | 'profile' | '404' | '500';
+WindowAPI.updateChangeRouteEvents();
 
-export default class App {
-  appElement: HTMLElement | null;
-  currentPage: Page;
-  currentPageElement: HTMLElement | null;
+async function checkIsAuth() {
+  try {
+    const response = await AuthAPI.getAuthUser();
 
-  constructor() {
-    this.currentPage = 'signIn';
-    this.appElement = document.getElementById('app');
-
-    this.currentPageElement = null;
-  }
-
-  render() {
-    const pageContent = this.getPageContent();
-
-    if (!this.appElement || !pageContent) return;
-
-    this.appElement.innerHTML = '';
-    this.appElement.append(pageContent);
-    this.attachEventListeners();
-  }
-
-  getPageContent(): HTMLElement | null {
-    switch (this.currentPage) {
-      case 'signIn':
-        return new SignInPage().getContent();
-      case 'signUp':
-        return new SignUpPage().getContent();
-      case 'profile':
-        return new ProfilePage().getContent();
-      case 'home':
-        return new HomePage().getContent();
-      case '404':
-        return new NotFoundPage().getContent();
-      case '500':
-        return new ServerErrorPage().getContent();
-      default:
-        return null;
+    if (response.ok) {
+      if (window.location.pathname === APP_ROUTES.SIGN_IN || window.location.pathname === APP_ROUTES.SIGN_UP) {
+        navigate(APP_ROUTES.CONVERSATIONS);
+      }
     }
+  } catch (e) {
+    console.log(e);
   }
+}
 
-  attachEventListeners() {
-    const links = document.querySelectorAll('a[data-page]');
-    const buttons = document.querySelectorAll("button[id]");
+export class App {
+  start() {
+    router
+      .setPublicPathnames([APP_ROUTES.SIGN_IN, APP_ROUTES.SIGN_UP, APP_ROUTES.SERVER_ERROR])
+      .onRoute(AuthController.checkAuth)
+      .use(APP_ROUTES.SIGN_IN, SignInPage)
+      .use(APP_ROUTES.SIGN_UP, SignUpPage)
+      .use(APP_ROUTES.CONVERSATIONS, HomePage)
+      .use(APP_ROUTES.SETTINGS, ProfilePage)
+      .use(APP_ROUTES.SERVER_ERROR, ServerErrorPage)
+      .use(APP_ROUTES.NOT_FOUND, NotFoundPage);
 
-    links.forEach(link => {
-      link.addEventListener('click', e => {
-        e.preventDefault();
-        e.stopPropagation();
-        const link = e.target as HTMLLinkElement;
+    checkIsAuth();
 
-        if (!link.dataset.page) return;
-
-        this.changePage(link.dataset.page as Page);
-      });
-    });
-
-    buttons.forEach(btn => {
-      btn.addEventListener('click', e => {
-        e.preventDefault();
-        const btn = e.target as HTMLButtonElement;
-
-        const page = btn.getAttribute('id')
-
-        if (!page) return;
-
-        this.changePage(page as Page);
-      });
-    });
-  }
-
-  changePage(page: Page): void {
-    this.currentPage = page;
-    this.render();
+    router.start();
   }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
   const app = new App();
-
-  app.render();
+  app.start();
 });

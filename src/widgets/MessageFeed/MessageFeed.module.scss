@@ -1,0 +1,69 @@
+.mainContainer {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+
+  .top {
+    border-bottom: var(--border-primary);
+    display: flex;
+    gap: 1rem;
+    position: relative;
+  }
+
+  .top,
+  .bottom {
+    padding: 1.1rem 0;
+    height: 5.5rem;
+    margin: 0 20px;
+  }
+
+  .bottom {
+    border-top: var(--border-primary);
+  }
+
+  .main {
+    flex: 1;
+  }
+
+  .chatInfo {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+
+    .fallbackChatAvatar {
+      width: 3.4rem;
+      height: 3.4rem;
+      border-radius: 50%;
+      background-color: var(--bg-tertiary);
+    }
+
+    .chatTitle {
+      font: var(--font-base);
+      font-weight: 600;
+    }
+  }
+
+  .actionSlot {
+    margin-left: auto;
+  }
+
+  .btnChatActions {
+    width: 2.8rem;
+    height: 2.8rem;
+    border-radius: 50%;
+  }
+}
+
+
+
+.btnEdit {
+  width: 2rem;
+  height: 2rem;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--secondary-color);
+}
