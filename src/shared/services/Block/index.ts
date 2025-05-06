@@ -25,7 +25,6 @@ export abstract class Block<TProps extends BlockProps = BlockProps> {
   constructor(props: Partial<TProps> & BlockProps = {}) {
     this.id = generateUUID();
     this.props = this._makePropsProxy(props);
-
     this._eventBus = new EventBus();
     this._registerEvents();
     this._eventBus.emit(Block.EVENTS.INIT);
@@ -63,6 +62,7 @@ export abstract class Block<TProps extends BlockProps = BlockProps> {
 
   private _render() {
     this._removeEvents();
+    this._componentWillUnmount();
 
     const templateProps = this._generateTemplateProps();
     const templateTree = this._generateMarkupTemplateTree(templateProps);
