@@ -212,6 +212,7 @@ export abstract class Block<TProps extends BlockProps = BlockProps> {
 
   public remove() {
     if (this._element) {
+      this._eventBus.emit(Block.EVENTS.FLOW_CWU);
       this._element?.remove();
     }
   }
