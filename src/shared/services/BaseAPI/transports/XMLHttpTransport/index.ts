@@ -16,36 +16,36 @@ interface XMLHttpOptions extends ApiRequestOptions {
 type HTTPMethod = <TResData = unknown, TReqData = unknown, TError = unknown>(
   url: string,
   data: TReqData,
-  options: ApiRequestOptions,
+  options?: ApiRequestOptions,
 ) => Promise<ApiResponse<TResData, TError>>;
 
 export class XMLHttpTransport implements ApiTransport {
-  async get<TResData = unknown, TError = unknown>(url: string, options: ApiRequestOptions): Promise<ApiResponse<TResData, TError>> {
+  public async get<TResData = unknown, TError = unknown>(url: string, options?: ApiRequestOptions): Promise<ApiResponse<TResData, TError>> {
     const xhr = await this._request(url, undefined, { method: METHODS.GET, ...options });
     return this._transformResponse<TResData, TError>(xhr);
   }
 
-  post: HTTPMethod = async (url, data, options) => {
+  public post: HTTPMethod = async (url, data, options) => {
     const xhr = await this._request(url, data, { method: METHODS.POST, ...options });
     return this._transformResponse(xhr);
   };
 
-  patch: HTTPMethod = async (url, data, options) => {
+  public patch: HTTPMethod = async (url, data, options) => {
     const xhr = await this._request(url, data, { method: METHODS.PATCH, ...options });
     return this._transformResponse(xhr);
   };
 
-  put: HTTPMethod = async (url, data, options) => {
+  public put: HTTPMethod = async (url, data, options) => {
     const xhr = await this._request(url, data, { method: METHODS.PUT, ...options });
     return this._transformResponse(xhr);
   };
 
-  delete: HTTPMethod = async (url, data, options) => {
+  public delete: HTTPMethod = async (url, data, options) => {
     const xhr = await this._request(url, data, { method: METHODS.DELETE, ...options });
     return this._transformResponse(xhr);
   };
 
-  async _request(url: string, data: unknown, options: XMLHttpOptions): Promise<XMLHttpRequest> {
+  private async _request(url: string, data: unknown, options: XMLHttpOptions): Promise<XMLHttpRequest> {
     const { method = METHODS.GET, credentials, params = {}, headers } = options;
 
     return new Promise((resolve, reject) => {
@@ -76,7 +76,7 @@ export class XMLHttpTransport implements ApiTransport {
     });
   }
 
-  _transformResponse<T, U>(xhr: XMLHttpRequest): ApiResponse<T, U> {
+  private _transformResponse<T, U>(xhr: XMLHttpRequest): ApiResponse<T, U> {
     if (xhr.status >= 200 && xhr.status <= 299) {
       return {
         ok: true,
