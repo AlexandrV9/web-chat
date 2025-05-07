@@ -1,7 +1,5 @@
 import { Block } from '@/shared/services';
-import tmpl from './tmpl';
-
-cons a = "dd"
+import { tmpl } from './tmpl';
 
 export class ServerErrorPage extends Block {
   constructor() {
