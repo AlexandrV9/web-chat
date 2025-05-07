@@ -18,6 +18,10 @@ export class Route {
     this._options = options;
   }
 
+  getPathname() {
+    return this._pathname;
+  }
+
   leave() {
     this._block?.remove();
   }

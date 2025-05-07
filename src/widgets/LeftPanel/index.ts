@@ -17,7 +17,7 @@ interface LeftPanelProps {
   title?: string;
 }
 
-export class LeftPanel extends Block {
+export class LeftPanel extends Block<LeftPanelProps> {
   constructor({ title = '' }: LeftPanelProps) {
     super({
       title,

@@ -14,3 +14,5 @@ export * from './clsx';
 export * from './convertObjKeysToSnakeCase';
 export * from './getImageSrc';
 export * from './debounce';
+export * from './take';
+export * from './unzip';
