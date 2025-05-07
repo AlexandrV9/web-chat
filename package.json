@@ -16,7 +16,7 @@
     "clean": "rimraf node_modules/",
     "lint:ts": "npx eslint .  --fix",
     "lint:css": "npx stylelint \"**/*.{css,scss}\" --fix",
-    "lint:all": "concurrently \"npm run lint:ts\" \"npm run lint:css\"",
+    "lint": "concurrently \"npm run lint:ts\" \"npm run lint:css\"",
     "test": "jest",
     "prepare": "husky"
   },
