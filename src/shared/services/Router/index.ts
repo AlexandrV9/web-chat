@@ -52,8 +52,6 @@ export class Router {
     );
 
     const pathname = this._hasRoute(window.location.pathname);
-
-    console.log(pathname);
     this._onRoute(pathname);
   }
 
@@ -93,19 +91,23 @@ export class Router {
     }
   }
 
-  getRouteByPathname(pathname: string): Route | undefined {
+  public getCurrentRoute() {
+    return this._currentRoute;
+  }
+
+  public getRouteByPathname(pathname: string): Route | undefined {
     return this.routes.find(route => route.match(pathname));
   }
 
-  goToNextPage() {
+  public goToNextPage() {
     window.history.forward();
   }
 
-  goToPrevPage() {
+  public goToPrevPage() {
     window.history.back();
   }
 
-  goByPathname(pathname: string) {
+  public goByPathname(pathname: string) {
     this.history?.pushState({}, '', pathname);
     this._onRoute(pathname);
   }
